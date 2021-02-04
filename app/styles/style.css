@@ -1,0 +1,265 @@
+/**
+Color definitions
+pink: e94957
+teal: e5f6df
+light blue: a8dadc
+blue: 457b9d
+dark blue: 1d3557
+white: fdfdfd
+black: 1d3557
+*/
+
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+i.bx {
+    font-size: 1.5em;
+    color: white;
+}
+
+i.bx:hover {
+    color: darkgray;
+}
+
+button {
+    color: #fdfdfd !important;
+    background-color: #1d3557 !important;
+    border: none !important;
+}
+
+button:hover {
+    cursor: pointer;
+    color: lightgray !important;
+}
+
+#contact-button {
+    margin-top: 60px;
+}
+
+#page-container,
+#page,
+#content-container,
+#content,
+#footer-container,
+#footer {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.section {
+    padding: 15px 15px 15px 15px;
+    height: 600px;
+    width: 100vw;
+}
+
+.navbar {
+    background-color: #1d3557 !important;
+}
+
+.navbar-nav {
+    margin-left: 5vw;
+}
+
+a.nav-item.nav-link {
+    margin-right: 5vw;
+    color: #fdfdfd !important;
+}
+
+a.nav-item.nav-link:hover {
+    color: lightgray !important;
+}
+
+a.nav-item.nav-link.active {
+    font-weight: bold;
+}
+
+#header-container,
+#header {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#header-container {
+    margin-top: 55px;
+}
+
+#header-text-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80vw;
+}
+
+#header-text > h1 {
+    font-weight: bold;
+}
+
+#header-text > h2 {
+    margin: 35px 0 35px 0;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 28px;
+}
+
+#content-container.section {
+    padding: 0 15px 0 15px;
+    height: 1000px;
+}
+
+#content-container {
+    background-color: #c1c1c1;
+}
+
+#footer-container {
+    background-color: #1d3557;
+    height: 400px;
+}
+
+#footer-container.section {
+    padding: 0 15px 0 15px;
+}
+
+.footer-row-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fdfdfd;
+    text-align: center;
+    width: 100vw;
+}
+
+.footer-column-container {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    padding-bottom: 0;
+}
+
+.footer-column-container > p > a {
+    color: #a8dadc !important;
+    text-decoration: none !important;
+}
+
+.footer-column-container > p > a:hover {
+    color: #e5f6df !important;
+}
+
+#email-form-container {
+    margin-top: 15px;
+}
+
+#subscribe-button {
+    background-color: #457b9d !important;
+}
+
+#footer-icons {
+    display: flex;
+    flex: 1;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+    width: 50%;
+}
+
+#footer-icons > a {
+    margin: 0 20px 0 20px;
+    color: #fdfdfd !important;
+}
+
+#footer-icons > a:hover {
+    color: #a8dadc !important;
+}
+
+#footer-sugar {
+    flex: 2;
+}
+
+#footer-admin {
+    flex: 1;
+}
+
+/* Tablet View */
+@media only screen and (min-width: 401px) and (max-width: 991px) {
+    #header-text-container {
+        width: 60vw;
+    }
+
+    .footer-row-container {
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+
+    .footer-column-container {
+        padding-bottom: 15px;
+    }
+
+    #email-form-container {
+        justify-content: baseline;
+        text-align: left;
+    }
+}
+
+
+/* Desktop View */
+@media only screen and (min-width: 992px) {
+
+    .navbar-nav {
+        margin-left: 15vw;
+    }
+
+    .navbar-nav:first-child {
+        margin-left: 5vw;
+    }
+
+    #contact-button {
+        margin-top: 105px;
+    }
+
+    .footer-row-container {
+        flex-direction: row;
+        font-size: 16px;
+        justify-content: space-evenly;
+    }
+
+    .footer-column-container {
+        padding-bottom: 15px;
+    }
+
+    #email-form-container {
+        justify-content: baseline;
+        text-align: left;
+    }
+
+    /* If these end up being used on other pages than the home page, uncomment this and remove from home-style */
+    /* #header-container,
+    #header {
+        text-align: start;
+        align-items: baseline;
+    }
+
+    #header {
+        margin-left: 14vw;
+    }
+
+    #header-text-container {
+        width: 45vw;
+    }
+
+    #header-text > p {
+        font-size: 28px;
+        margin: 15px 0 15px 0;
+    } */
+}
