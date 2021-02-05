@@ -110,8 +110,14 @@
     text-align: center;
 }
 
+@media only screen and (min-width: 450px) and (max-width: 619px) {
+    .testimonial-tile {
+        margin: 15px 15px 15px 15px;
+    }
+}
+
 /* Tablet View */
-@media only screen and (min-width: 450px) and (max-width: 1091px) {
+@media only screen and (min-width: 620px) and (max-width: 1091px) {
     #header-text-container {
         width: 70vw;
     }
@@ -134,7 +140,7 @@
 
     .testimonial-content {
         padding: 10px 10px 0 10px;
-        font-size: 12px;
+        font-size: 14px;
     }
 }
 

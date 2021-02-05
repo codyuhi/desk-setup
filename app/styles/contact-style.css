@@ -1,0 +1,48 @@
+h1 {
+    font-weight: bold;
+    margin: 0 0 30px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input,
+textarea,
+#contact-form-container > button {
+    box-shadow: -2px 2px lightgray;
+}
+
+#contact-content-container {
+    height: 840px;
+    background-color: #fdfdfd;
+}
+
+#contact-form-container {
+    margin-top: 100px;
+}
+
+.contact-form {
+    width: 80vw;
+}
+
+#contact-form-button {
+    background-color: #457b9d !important;
+    margin-top: 15px;
+    float: right;
+    padding: 10px 35px 10px 35px;
+}
+
+/* Tablet View */
+@media only screen and (min-width: 450px) and (max-width: 1091px) {
+    .contact-form {
+        width: 60vw;
+    }
+}
+
+/* Desktop View */
+@media only screen and (min-width: 1092px) {
+    .contact-form {
+        width: 40vw;
+    }
+}
