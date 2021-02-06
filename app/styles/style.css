@@ -91,7 +91,7 @@ a.nav-item.nav-link.active {
     margin-top: 55px;
 }
 
-#header-text-container {
+.header-text-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -193,8 +193,12 @@ a.nav-item.nav-link.active {
 
 /* Tablet View */
 @media only screen and (min-width: 620px) and (max-width: 991px) {
-    #header-text-container {
-        width: 60vw;
+    .header-text-container {
+        width: 70vw;
+    }
+
+    #header-text > h2 {
+        font-size: 28px;
     }
 
     .footer-row-container {
@@ -215,13 +219,31 @@ a.nav-item.nav-link.active {
 
 /* Desktop View */
 @media only screen and (min-width: 992px) {
-
     .navbar-nav {
         margin-left: 15vw;
     }
 
     .navbar-nav:first-child {
         margin-left: 5vw;
+    }
+
+    #header-container,
+    #header {
+        text-align: start;
+        align-items: baseline;
+    }
+
+    #header {
+        margin-left: 200px;
+    }
+
+    .header-text-container {
+        width: 655px;
+    }
+
+    #header-text > h2 {
+        font-size: 24px;
+        margin: 15px 0 15px 0;
     }
 
     #contact-button {
@@ -242,24 +264,4 @@ a.nav-item.nav-link.active {
         justify-content: baseline;
         text-align: left;
     }
-
-    /* If these end up being used on other pages than the home page, uncomment this and remove from home-style */
-    /* #header-container,
-    #header {
-        text-align: start;
-        align-items: baseline;
-    }
-
-    #header {
-        margin-left: 14vw;
-    }
-
-    #header-text-container {
-        width: 45vw;
-    }
-
-    #header-text > p {
-        font-size: 28px;
-        margin: 15px 0 15px 0;
-    } */
 }

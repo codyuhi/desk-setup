@@ -118,14 +118,6 @@
 
 /* Tablet View */
 @media only screen and (min-width: 620px) and (max-width: 1091px) {
-    #header-text-container {
-        width: 70vw;
-    }
-
-    #header-text > h2 {
-        font-size: 28px;
-    }
-
     .mission-description-text {
         font-size: 20px;
     }
@@ -147,25 +139,6 @@
 
 /* Desktop View */
 @media only screen and (min-width: 1092px) {
-    #header-container,
-    #header {
-        text-align: start;
-        align-items: baseline;
-    }
-
-    #header {
-        margin-left: 200px;
-    }
-
-    #header-text-container {
-        width: 655px;
-    }
-
-    #header-text > h2 {
-        font-size: 24px;
-        margin: 15px 0 15px 0;
-    }
-
     #mission {
         width: 1040px;
     }
