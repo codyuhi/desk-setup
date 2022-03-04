@@ -1,19 +1,28 @@
 import React from 'react'
 import { Navbar, Nav, NavItem } from 'react-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap'
 
 const DeskNavbar = () => {
     return (
         <Navbar>
-            <Navbar.Header>
-                <Navbar.Brand>
-                    <a href="/"></a>
-                </Navbar.Brand>
-            </Navbar.Header>
+            <Navbar.Brand>
+                <LinkContainer to="/">
+                    <NavItem><h1>Navbar</h1></NavItem>
+                </LinkContainer>
+            </Navbar.Brand>
             <Nav>
-                <NavItem eventKey={1} href="/">Home</NavItem>
-                <NavItem eventKey={2} href="/studio-size">Studio Size</NavItem>
-                <NavItem eventKey={3} href="/large-size">Large Size</NavItem>
-                <NavItem eventKey={4} href="/contact">Contact</NavItem>
+                <LinkContainer to="/">
+                    <NavItem>Home</NavItem>
+                </LinkContainer>
+                <LinkContainer to="/studio-size">
+                    <NavItem>Studio Size</NavItem>
+                </LinkContainer>
+                <LinkContainer to="/large-size">
+                    <NavItem>Large Size</NavItem>
+                </LinkContainer>
+                <LinkContainer to="/contact">
+                    <NavItem>Contact</NavItem>
+                </LinkContainer>
             </Nav>
         </Navbar>
     )
