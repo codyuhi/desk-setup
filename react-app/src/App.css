@@ -1,0 +1,17 @@
+:root {
+  --pink: #e94957;
+  --teal: #e5f6df;
+  --lightblue: #a8dadc;
+  --blue: #457b9d;
+  --darkblue: #1d3557;
+  --white: #fdfdfd;
+  --black: #1d3557;
+}
+
+* {
+  font-family: "Roboto", sans-serif;
+}
+
+nav {
+  background-color: var(--darkblue);
+}
