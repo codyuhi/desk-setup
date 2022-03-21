@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 
 // custom components
-import DeskNavbar from './components/DeskNavbar'
+import DeskNavbar from './components/desk-navbar/DeskNavbar'
 import Home from './components/home/Home'
 import StudioSize from './components/studio-size/StudioSize';
 import LargeSize from './components/large-size/LargeSize'

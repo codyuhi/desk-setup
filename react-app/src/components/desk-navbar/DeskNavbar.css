@@ -1,0 +1,142 @@
+.navbar {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-brand {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  flex: 1;
+}
+
+.navbar-toggler-container {
+  width: 100% !important;
+  display: flex;
+  flex-direction: row !important;
+  justify-content: flex-end !important;
+  align-items: center !important;
+}
+
+.navbar-toggler {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+i.bx {
+  font-size: 2em;
+  color: var(--white);
+}
+
+i.open {
+  color: darkgray;
+}
+
+button {
+  color: #fdfdfd !important;
+  background-color: #1d3557 !important;
+  border: none !important;
+}
+
+button:hover {
+  cursor: pointer;
+  color: lightgray !important;
+}
+
+.open {
+    display: flex;
+}
+
+.closed {
+    display: none !important;
+}
+
+.navbar-nav {
+  display: flex;
+  flex: 2;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.nav-item {
+  color: var(--white);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  text-transform: uppercase;
+  padding: 10px;
+}
+
+.nav-item:hover {
+  cursor: pointer;
+  color: var(--lightblue);
+}
+
+.active {
+  font-weight: bold;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
+/* Tablet View */
+@media only screen and (min-width: 620px) and (max-width: 991px) {
+  .navbar,
+  .navbar-nav {
+    flex-direction: row;
+  }
+
+  .navbar {
+    align-items: center;
+  }
+
+  .navbar-toggler-container {
+      display: none;
+  }
+
+  .closed {
+      display: flex !important;
+  }
+
+  .navbar-nav {
+    align-items: flex-start;
+  }
+
+  .nav-item {
+      padding: 5px;
+  }
+}
+
+/* Desktop View */
+@media only screen and (min-width: 992px) {
+  .navbar,
+  .navbar-nav {
+    flex-direction: row;
+  }
+
+  .navbar {
+    align-items: center;
+  }
+
+  .navbar-toggler-container {
+      display: none;
+  }
+
+  .closed {
+      display: flex !important;
+  }
+
+  .navbar-nav {
+    align-items: flex-start;
+  }
+
+  .nav-item {
+      padding: 5px;
+  }
+}
