@@ -59,3 +59,20 @@ yarn start
 ```
 
 4. Open a browser to http://localhost:3000 and verify the page loads properly
+
+### Docker
+
+1. Build the Docker image
+
+```
+docker build -t desk-setup .
+```
+
+2. Run the Docker container and expose a port for you to access from localhost
+
+```
+docker run -p 8084:80 desk-setp
+```
+
+3. Open a browser window and navigate to localhost and the port you opened
+   "http://localhost:8084"
