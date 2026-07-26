@@ -5,8 +5,8 @@ FROM node:20-alpine AS builder
 
 WORKDIR /app
 
-# Copy package descriptors from app/ directory
-COPY app/package*.json ./
+# Copy package descriptors explicitly (avoids Kaniko wildcard glob bug with package*.json)
+COPY app/package.json app/package-lock.json ./
 
 # Install dependencies
 RUN npm ci || npm install
