@@ -2,31 +2,39 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>DESKForge | 3D & 2D Desk Setup Designer</title>
     <meta name="description" content="Design, customize, and budget your ideal 3D & 2D workspace desk setup interactively in the browser." />
+    <meta name="theme-color" content="#0f172a" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="stylesheet" href="./src/style.css" />
   </head>
   <body>
     <div id="app">
+      <!-- Backdrop for mobile sheets and modals -->
+      <div id="sheetBackdrop" class="sheet-backdrop"></div>
+
       <!-- TOP HEADER NAVBAR -->
       <header class="header">
         <div class="brand">
           <div class="brand-icon">⚡</div>
-          <span class="brand-title">DESKForge Studio</span>
+          <span class="brand-title">DESKForge<span class="brand-sub desktop-only"> Studio</span></span>
         </div>
 
         <div class="header-center">
-          <button id="btnView3D" class="view-btn active">
-            <span>🧊 3D Perspective</span>
+          <button id="btnView3D" class="view-btn active" aria-label="3D Perspective View">
+            <span>🧊 <span class="view-text">3D Perspective</span></span>
           </button>
-          <button id="btnView2D" class="view-btn">
-            <span>📐 2D Blueprint</span>
+          <button id="btnView2D" class="view-btn" aria-label="2D Blueprint View">
+            <span>📐 <span class="view-text">2D Blueprint</span></span>
           </button>
         </div>
 
-        <div class="header-actions">
+        <!-- Desktop Action Buttons -->
+        <div class="header-actions desktop-only">
           <select id="presetSelect" class="preset-dropdown" title="Load Preset Setup">
             <option value="">⚡ Load Preset Setup...</option>
             <option value="preset-developer">👨‍💻 Senior Engineer Workstation</option>
@@ -51,16 +59,25 @@
             <span>🗑️</span>
           </button>
         </div>
+
+        <!-- Mobile Header Menu Trigger -->
+        <button id="btnMobileMenu" class="btn btn-mobile-trigger mobile-only" aria-label="Studio Actions Menu">
+          <span>⚡ Actions</span>
+        </button>
       </header>
 
       <!-- MAIN WORKSPACE CONTAINER -->
       <main class="main-workspace">
         <!-- LEFT SIDEBAR: ITEM CATALOG -->
-        <aside class="sidebar-catalog">
+        <aside id="sidebarCatalog" class="sidebar-catalog">
+          <div class="sheet-drag-handle mobile-only"></div>
           <div class="catalog-header">
             <div class="catalog-title">
-              <span>Hardware & Furniture</span>
-              <span id="catalogCountBadge" style="font-size: 12px; color: var(--accent-cyan); font-weight: 500;">(20+ Items)</span>
+              <div class="catalog-title-text">
+                <span>Hardware & Furniture</span>
+                <span id="catalogCountBadge" class="catalog-badge">(20+ Items)</span>
+              </div>
+              <button id="btnCloseCatalog" class="sheet-close-btn mobile-only" aria-label="Close Catalog">✕</button>
             </div>
             <div id="categoryPills" class="category-pills">
               <!-- Category pills dynamically populated -->
@@ -74,11 +91,11 @@
 
         <!-- CENTER VIEWPORT CANVAS AREA -->
         <section class="canvas-container" id="canvasViewport">
-          <div id="canvas3DContainer" style="width: 100%; height: 100%; position: absolute;"></div>
+          <div id="canvas3DContainer"></div>
           <canvas id="canvas2d"></canvas>
 
           <!-- FLOATING CONTROL TOOLBAR -->
-          <div class="floating-toolbar">
+          <div class="floating-toolbar" id="floatingToolbar">
             <div class="tool-group">
               <button id="btnCamPerspective" class="tool-btn" title="Perspective Camera">🎥</button>
               <button id="btnCamIso" class="tool-btn" title="Isometric View">🧊</button>
@@ -86,9 +103,9 @@
               <button id="btnCamFront" class="tool-btn" title="Front Eye-Level">👁️</button>
             </div>
 
-            <div class="divider-vert"></div>
+            <div class="divider-vert desktop-only"></div>
 
-            <div class="height-slider-box">
+            <div class="height-slider-box desktop-only">
               <span>Height:</span>
               <input type="range" id="sliderDeskHeight" min="65" max="120" value="74" step="1" />
               <span id="textDeskHeight">74cm</span>
@@ -97,8 +114,8 @@
             <div class="divider-vert"></div>
 
             <div class="tool-group">
-              <button id="btnGizmoTranslate" class="tool-btn active" title="3D Translate Drag Gizmo (X, Y, Z Arrows)">🖐️ Drag</button>
-              <button id="btnGizmoRotate" class="tool-btn" title="3D Rotate Ring Gizmo">🔄 Rotate</button>
+              <button id="btnGizmoTranslate" class="tool-btn active" title="3D Translate Drag Gizmo">🖐️<span class="tool-label desktop-only"> Drag</span></button>
+              <button id="btnGizmoRotate" class="tool-btn" title="3D Rotate Ring Gizmo">🔄<span class="tool-label desktop-only"> Rotate</span></button>
             </div>
 
             <div class="divider-vert"></div>
@@ -106,15 +123,44 @@
             <div class="tool-group">
               <button id="btnUndo" class="tool-btn" title="Undo (Cmd+Z)">↩️</button>
               <button id="btnRedo" class="tool-btn" title="Redo (Cmd+Y)">↪️</button>
-              <button id="btnDeleteItem" class="tool-btn" title="Delete Selected Item (Del)">🗑️</button>
+              <button id="btnDeleteItem" class="tool-btn desktop-only" title="Delete Selected Item (Del)">🗑️</button>
+            </div>
+          </div>
+
+          <!-- FLOATING ITEM ACTION BAR (Appears on Selection) -->
+          <div id="selectedItemFloatingBar" class="selected-item-floating-bar" style="display: none;">
+            <div class="floating-item-info">
+              <span class="floating-icon">✨</span>
+              <span id="floatingItemTitle" class="floating-item-title">Item Name</span>
+            </div>
+            <div class="floating-item-actions">
+              <button id="btnFloatingRotate" class="btn-floating-action" title="Rotate 45°">
+                <span>🔄 45°</span>
+              </button>
+              <button id="btnFloatingDelete" class="btn-floating-action btn-danger" title="Delete Item">
+                <span>🗑️</span>
+              </button>
+              <button id="btnFloatingDeselect" class="btn-floating-action btn-dim" title="Deselect">
+                <span>✕</span>
+              </button>
             </div>
           </div>
         </section>
 
         <!-- RIGHT SIDEBAR: INSPECTOR & BUDGET -->
-        <aside class="sidebar-inspector">
+        <aside id="sidebarInspector" class="sidebar-inspector">
+          <div class="sheet-drag-handle mobile-only"></div>
+          <div class="inspector-header mobile-only">
+            <div class="inspector-tabs">
+              <button class="tab-btn active" data-tab="desk">🪵 Desk</button>
+              <button class="tab-btn" data-tab="item">✨ Item</button>
+              <button class="tab-btn" data-tab="budget">📊 Budget</button>
+            </div>
+            <button id="btnCloseInspector" class="sheet-close-btn" aria-label="Close Inspector">✕</button>
+          </div>
+
           <!-- DESK CUSTOMIZER -->
-          <div class="inspector-section">
+          <div class="inspector-section" id="sectionDeskFinish">
             <div class="section-title">
               <span>Desk Surface Finish</span>
             </div>
@@ -128,12 +174,12 @@
           </div>
 
           <!-- DESK DIMENSIONS CUSTOMIZER -->
-          <div class="inspector-section">
+          <div class="inspector-section" id="sectionDeskDimensions">
             <div class="section-title">
               <span>Desk Surface Dimensions</span>
             </div>
             
-            <div class="finish-picker" id="deskSizePresets" style="gap: 4px; flex-wrap: wrap;">
+            <div class="finish-picker" id="deskSizePresets" style="gap: 6px; flex-wrap: wrap;">
               <button class="size-pill" data-w="120" data-d="60">120×60</button>
               <button class="size-pill" data-w="140" data-d="70">140×70</button>
               <button class="size-pill active" data-w="160" data-d="80">160×80</button>
@@ -141,17 +187,23 @@
               <button class="size-pill" data-w="200" data-d="100">200×100</button>
             </div>
 
-            <div style="margin-top: 10px; display: flex; flex-direction: column; gap: 8px;">
+            <div style="margin-top: 12px; display: flex; flex-direction: column; gap: 10px;">
               <div class="height-slider-box" style="width: 100%;">
                 <span style="width: 50px;">Width:</span>
                 <input type="range" id="sliderDeskWidth" min="100" max="240" value="160" step="5" style="flex: 1;" />
-                <span id="textDeskWidth" style="width: 45px; text-align: right;">160cm</span>
+                <span id="textDeskWidth" style="width: 48px; text-align: right;">160cm</span>
               </div>
 
               <div class="height-slider-box" style="width: 100%;">
                 <span style="width: 50px;">Depth:</span>
                 <input type="range" id="sliderDeskDepth" min="50" max="120" value="80" step="5" style="flex: 1;" />
-                <span id="textDeskDepth" style="width: 45px; text-align: right;">80cm</span>
+                <span id="textDeskDepth" style="width: 48px; text-align: right;">80cm</span>
+              </div>
+
+              <div class="height-slider-box mobile-only" style="width: 100%;">
+                <span style="width: 50px;">Height:</span>
+                <input type="range" id="sliderDeskHeightMobile" min="65" max="120" value="74" step="1" style="flex: 1;" />
+                <span id="textDeskHeightMobile" style="width: 48px; text-align: right;">74cm</span>
               </div>
             </div>
           </div>
@@ -167,7 +219,7 @@
           </div>
 
           <!-- ERGONOMICS DIAGNOSTIC -->
-          <div class="ergo-card">
+          <div class="ergo-card" id="sectionErgo">
             <div style="font-size: 12px; font-weight: 600; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.5px;">
               Ergonomic Posture Diagnostic
             </div>
@@ -181,7 +233,7 @@
           </div>
 
           <!-- BUDGET & PARTS LIST -->
-          <div class="inspector-section">
+          <div class="inspector-section" id="sectionBudget">
             <div class="section-title">
               <span>Hardware & Budget</span>
               <button id="btnExportCSV" class="btn" style="font-size: 11px; padding: 4px 8px;" title="Export Shopping List CSV">
@@ -200,6 +252,73 @@
           </div>
         </aside>
       </main>
+
+      <!-- MOBILE ACTIONS & PRESETS SHEET -->
+      <div id="mobileMenuSheet" class="mobile-menu-sheet">
+        <div class="sheet-drag-handle"></div>
+        <div class="mobile-menu-header">
+          <div class="mobile-menu-title">
+            <span>⚡ Studio Actions & Presets</span>
+          </div>
+          <button id="btnCloseMobileMenu" class="sheet-close-btn" aria-label="Close Menu">✕</button>
+        </div>
+
+        <div class="mobile-menu-body">
+          <div class="menu-section">
+            <label class="menu-label">Workspace Preset</label>
+            <select id="presetSelectMobile" class="preset-dropdown w-full">
+              <option value="">⚡ Load Preset Setup...</option>
+              <option value="preset-developer">👨‍💻 Senior Engineer Workstation</option>
+              <option value="preset-gamer">🎮 Battlestation RGB Gamer</option>
+              <option value="preset-minimalist">🌿 Scandinavian Minimalist</option>
+            </select>
+          </div>
+
+          <div class="menu-section">
+            <label class="menu-label">Snapshot & Exports</label>
+            <div class="menu-button-grid">
+              <button id="btnMobileSnapshot" class="btn btn-primary w-full">
+                <span>📸 Export Snapshot PNG</span>
+              </button>
+              <button id="btnMobileExportConfig" class="btn w-full">
+                <span>💾 Save JSON Config</span>
+              </button>
+              <button id="btnMobileImportConfig" class="btn w-full">
+                <span>📂 Open JSON Config</span>
+              </button>
+              <button id="btnMobileExportCSV" class="btn w-full">
+                <span>📊 Export Budget CSV</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="menu-section">
+            <button id="btnMobileClear" class="btn btn-danger-outline w-full">
+              <span>🗑️ Clear / Reset Setup</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- MOBILE BOTTOM NAVIGATION BAR -->
+      <nav id="mobileNavBar" class="mobile-nav-bar mobile-only">
+        <button id="btnNavCatalog" class="mobile-nav-btn" aria-label="Open Items Catalog">
+          <span class="nav-icon">📦</span>
+          <span class="nav-label">Catalog</span>
+        </button>
+        <button id="btnNavDesk" class="mobile-nav-btn" aria-label="Open Desk Finishes & Size">
+          <span class="nav-icon">🪵</span>
+          <span class="nav-label">Desk</span>
+        </button>
+        <button id="btnNavStats" class="mobile-nav-btn" aria-label="Open Budget & Ergonomics">
+          <span class="nav-icon">📊</span>
+          <span class="nav-label">Budget</span>
+        </button>
+        <button id="btnNavMenu" class="mobile-nav-btn" aria-label="Open Studio Menu">
+          <span class="nav-icon">⚡</span>
+          <span class="nav-label">Actions</span>
+        </button>
+      </nav>
 
       <!-- TOAST NOTIFICATION -->
       <div id="toast" class="toast-box">Notification message</div>

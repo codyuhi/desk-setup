@@ -32,9 +32,10 @@ export class Canvas2DManager {
   }
 
   initEvents() {
-    this.canvas.addEventListener('mousedown', (e) => this.onMouseDown(e));
-    this.canvas.addEventListener('mousemove', (e) => this.onMouseMove(e));
-    this.canvas.addEventListener('mouseup', () => this.onMouseUp());
+    this.canvas.addEventListener('pointerdown', (e) => this.onPointerDown(e));
+    this.canvas.addEventListener('pointermove', (e) => this.onPointerMove(e));
+    this.canvas.addEventListener('pointerup', (e) => this.onPointerUp(e));
+    this.canvas.addEventListener('pointercancel', (e) => this.onPointerUp(e));
   }
 
   getDeskCenter() {
@@ -161,7 +162,7 @@ export class Canvas2DManager {
     this.ctx.restore();
   }
 
-  onMouseDown(event) {
+  onPointerDown(event) {
     const rect = this.canvas.getBoundingClientRect();
     const mouseX = event.clientX - rect.left;
     const mouseY = event.clientY - rect.top;
@@ -193,10 +194,15 @@ export class Canvas2DManager {
     if (clickedItemId) {
       this.isDragging = true;
       this.draggedItemId = clickedItemId;
+      try {
+        this.canvas.setPointerCapture(event.pointerId);
+      } catch (err) {
+        // Fallback if not supported
+      }
     }
   }
 
-  onMouseMove(event) {
+  onPointerMove(event) {
     if (!this.isDragging || !this.draggedItemId) return;
 
     const rect = this.canvas.getBoundingClientRect();
@@ -207,7 +213,14 @@ export class Canvas2DManager {
     state.updateItemPosition(this.draggedItemId, cmPos.x, cmPos.z);
   }
 
-  onMouseUp() {
+  onPointerUp(event) {
+    if (this.isDragging && event?.pointerId) {
+      try {
+        this.canvas.releasePointerCapture(event.pointerId);
+      } catch (err) {
+        // Fallback
+      }
+    }
     this.isDragging = false;
     this.draggedItemId = null;
   }

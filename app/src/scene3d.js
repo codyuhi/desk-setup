@@ -113,9 +113,10 @@ export class Scene3DManager {
     this.raycaster = new THREE.Raycaster();
     this.mouse = new THREE.Vector2();
 
+    const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
     this.transformControls = new TransformControls(this.camera, this.renderer.domElement);
     this.transformControls.setMode('translate');
-    this.transformControls.setSize(0.75);
+    this.transformControls.setSize(isTouch ? 1.05 : 0.75);
 
     this.transformControls.addEventListener('dragging-changed', (event) => {
       this.controls.enabled = !event.value;
@@ -132,11 +133,24 @@ export class Scene3DManager {
 
     this.scene.add(this.transformControls.getHelper());
 
-    this.renderer.domElement.addEventListener('pointerdown', (e) => this.onPointerDown(e));
+    this.pointerStart = null;
+    this.renderer.domElement.addEventListener('pointerdown', (e) => {
+      this.pointerStart = { x: e.clientX, y: e.clientY, time: Date.now() };
+    });
+    this.renderer.domElement.addEventListener('pointerup', (e) => this.onPointerUp(e));
   }
 
-  onPointerDown(event) {
+  onPointerUp(event) {
     if (this.transformControls.dragging) return;
+    if (!this.pointerStart) return;
+
+    const dx = Math.abs(event.clientX - this.pointerStart.x);
+    const dy = Math.abs(event.clientY - this.pointerStart.y);
+    const dt = Date.now() - this.pointerStart.time;
+    this.pointerStart = null;
+
+    // Only consider it an intentional tap if pointer moved less than 10px and took less than 400ms
+    if (dx > 10 || dy > 10 || dt > 400) return;
 
     const rect = this.renderer.domElement.getBoundingClientRect();
     this.mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
