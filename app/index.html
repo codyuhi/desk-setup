@@ -5,11 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>DESKForge | 3D & 2D Desk Setup Designer</title>
     <meta name="description" content="Design, customize, and budget your ideal 3D & 2D workspace desk setup interactively in the browser." />
-    <meta name="theme-color" content="#0f172a" />
+    <meta name="theme-color" content="#ebe7df" />
+    <meta name="color-scheme" content="light dark" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <!-- SVG favicon only: it adapts to the browser chrome via prefers-color-scheme -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <!-- Apply the saved (or OS) theme before first paint to prevent a theme flash -->
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('deskforge_theme');
+          var theme = saved === 'light' || saved === 'dark'
+            ? saved
+            : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          document.documentElement.setAttribute('data-theme', theme);
+          document.querySelector('meta[name="theme-color"]').content = theme === 'dark' ? '#161614' : '#ebe7df';
+        } catch (e) {}
+      })();
+    </script>
     <link rel="stylesheet" href="./src/style.css" />
   </head>
   <body>
@@ -59,6 +78,9 @@
             <span>🗑️</span>
           </button>
         </div>
+
+        <!-- Theme toggle: visible on every screen size -->
+        <button id="btnThemeToggle" class="btn theme-toggle-btn" type="button"></button>
 
         <!-- Mobile Header Menu Trigger -->
         <button id="btnMobileMenu" class="btn btn-mobile-trigger mobile-only" aria-label="Studio Actions Menu">

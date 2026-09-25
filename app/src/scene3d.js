@@ -4,6 +4,7 @@ import { TransformControls } from 'three/examples/jsm/controls/TransformControls
 import { state } from './state.js';
 import { CATALOG_ITEMS } from './catalog.js';
 import { create3DItemMesh } from './models/proceduralModels.js';
+import { cssVar } from './theme.js';
 
 export class Scene3DManager {
   constructor(containerElement) {
@@ -13,6 +14,7 @@ export class Scene3DManager {
     this.initScene();
     this.initLights();
     this.initRoom();
+    this.applyTheme();
     this.initInteraction();
 
     state.subscribe((appState, changeType) => this.handleStateChange(appState, changeType));
@@ -21,12 +23,38 @@ export class Scene3DManager {
     this.animate();
 
     window.addEventListener('resize', () => this.onWindowResize());
+    window.addEventListener('themechange', () => this.applyTheme());
+  }
+
+  // GridHelper bakes its colors in at construction, so theme changes rebuild it.
+  buildGrid() {
+    if (this.gridHelper) {
+      this.scene.remove(this.gridHelper);
+      this.gridHelper.geometry.dispose();
+      this.gridHelper.material.dispose();
+    }
+    this.gridHelper = new THREE.GridHelper(6, 30, cssVar('--scene-grid-major'), cssVar('--scene-grid-minor'));
+    this.gridHelper.position.y = 0.001;
+    this.scene.add(this.gridHelper);
+  }
+
+  // Environment colors come from Cedar tokens in style.css (light or dark).
+  applyTheme() {
+    const bg = cssVar('--scene-bg');
+    this.scene.background.set(bg);
+    this.scene.fog.color.set(bg);
+    this.floorMat.color.set(cssVar('--scene-floor'));
+    this.wallMat.color.set(cssVar('--scene-wall'));
+    this.hemiLight.groundColor.set(cssVar('--scene-hemi-ground'));
+    this.fillLight.color.set(cssVar('--scene-fill'));
+    this.buildGrid();
+    this.updateHighlighting();
   }
 
   initScene() {
     this.scene = new THREE.Scene();
-    this.scene.background = new THREE.Color(0x1e2230);
-    this.scene.fog = new THREE.FogExp2(0x1e2230, 0.04);
+    this.scene.background = new THREE.Color();
+    this.scene.fog = new THREE.FogExp2(0x000000, 0.04);
 
     const aspect = this.container.clientWidth / this.container.clientHeight;
     this.camera = new THREE.PerspectiveCamera(45, aspect, 0.1, 100);
@@ -80,7 +108,7 @@ export class Scene3DManager {
     this.frontFill.position.set(0, 3.0, 4.0);
     this.scene.add(this.frontFill);
 
-    this.fillLight = new THREE.DirectionalLight(0x38bdf8, 0.6);
+    this.fillLight = new THREE.DirectionalLight(0xffffff, 0.6);
     this.fillLight.position.set(-3, 3, -3);
     this.scene.add(this.fillLight);
 
@@ -91,18 +119,18 @@ export class Scene3DManager {
 
   initRoom() {
     const floorGeo = new THREE.PlaneGeometry(12, 12);
-    const floorMat = new THREE.MeshStandardMaterial({ color: 0x273042, roughness: 0.6, metalness: 0.1 });
+    const floorMat = new THREE.MeshStandardMaterial({ roughness: 0.6, metalness: 0.1 });
+    this.floorMat = floorMat;
     this.floor = new THREE.Mesh(floorGeo, floorMat);
     this.floor.rotation.x = -Math.PI / 2;
     this.floor.receiveShadow = true;
     this.scene.add(this.floor);
 
-    this.gridHelper = new THREE.GridHelper(6, 30, 0x38bdf8, 0x334155);
-    this.gridHelper.position.y = 0.001;
-    this.scene.add(this.gridHelper);
+    this.buildGrid();
 
     const wallGeo = new THREE.PlaneGeometry(12, 8);
-    const wallMat = new THREE.MeshStandardMaterial({ color: 0x1e2636, roughness: 0.8 });
+    const wallMat = new THREE.MeshStandardMaterial({ roughness: 0.8 });
+    this.wallMat = wallMat;
     this.wall = new THREE.Mesh(wallGeo, wallMat);
     this.wall.position.set(0, 4, -2.5);
     this.wall.receiveShadow = true;
@@ -241,7 +269,7 @@ export class Scene3DManager {
         if (child.isMesh && child.material) {
           if (isSelected) {
             child.material.emissive = child.material.emissive || new THREE.Color(0x000000);
-            child.material.emissive.setHex(0x38bdf8);
+            child.material.emissive.set(cssVar('--scene-select'));
             child.material.emissiveIntensity = 0.4;
           } else {
             if (child.material.emissive && !child.name.includes('RGB') && !child.name.includes('screen')) {

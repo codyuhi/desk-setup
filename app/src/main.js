@@ -3,6 +3,7 @@ import { CATEGORIES, CATALOG_ITEMS, PRESET_SETUPS, FINISHES } from './catalog.js
 import { Scene3DManager } from './scene3d.js';
 import { Canvas2DManager } from './canvas2d.js';
 import { exportPNGSnapshot, exportJSONConfig, importJSONConfig, exportCSVBudget } from './exportUtils.js';
+import { initThemeToggle } from './theme.js';
 
 let scene3D = null;
 let canvas2D = null;
@@ -22,6 +23,7 @@ function initSceneManagers() {
   const container3D = document.getElementById('canvas3DContainer');
   const canvas2DElement = document.getElementById('canvas2d');
 
+  initThemeToggle(document.getElementById('btnThemeToggle'));
   scene3D = new Scene3DManager(container3D);
   canvas2D = new Canvas2DManager(canvas2DElement);
 
@@ -498,7 +500,7 @@ function updateInspectorAndBudget() {
             <div>Z: <strong style="color: var(--text-main);">${selected.z}cm</strong></div>
             <div>Rot: <strong style="color: var(--text-main);">${Math.round((selected.rotation * 180) / Math.PI)}°</strong></div>
           </div>
-          <button id="btnInspectorDelete" class="btn" style="width: 100%; color: #ef4444; border-color: rgba(239, 68, 68, 0.3);">
+          <button id="btnInspectorDelete" class="btn" style="width: 100%; color: var(--danger); border-color: color-mix(in srgb, var(--danger) 35%, transparent);">
             Remove Item
           </button>
         `;

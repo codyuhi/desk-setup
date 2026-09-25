@@ -20,20 +20,21 @@ export function exportPNGSnapshot(canvasElement, title = 'My DESKForge Setup') {
   const x = tempCanvas.width - badgeWidth - padding;
   const y = tempCanvas.height - badgeHeight - padding;
 
-  ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
-  ctx.strokeStyle = '#38bdf8';
+  // Export badge is a fixed Cedar Night label so it reads on any snapshot.
+  ctx.fillStyle = 'rgba(22, 22, 20, 0.88)';
+  ctx.strokeStyle = '#48a97c';
   ctx.lineWidth = 2;
   ctx.beginPath();
-  ctx.roundRect(x, y, badgeWidth, badgeHeight, 10);
+  ctx.roundRect(x, y, badgeWidth, badgeHeight, 6);
   ctx.fill();
   ctx.stroke();
 
-  ctx.fillStyle = '#f8fafc';
-  ctx.font = 'bold 16px Inter, sans-serif';
+  ctx.fillStyle = '#f4f2ed';
+  ctx.font = "bold 16px 'Source Serif 4', Georgia, serif";
   ctx.fillText('DESKForge Studio', x + 16, y + 24);
 
-  ctx.fillStyle = '#38bdf8';
-  ctx.font = '12px Inter, sans-serif';
+  ctx.fillStyle = '#48a97c';
+  ctx.font = "12px 'Plus Jakarta Sans', sans-serif";
   ctx.fillText(title, x + 16, y + 40);
   ctx.restore();
 

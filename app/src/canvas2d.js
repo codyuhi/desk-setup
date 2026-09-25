@@ -2,6 +2,7 @@
 
 import { state } from './state.js';
 import { CATALOG_ITEMS } from './catalog.js';
+import { cssVar } from './theme.js';
 
 export class Canvas2DManager {
   constructor(canvasElement) {
@@ -20,6 +21,7 @@ export class Canvas2DManager {
     window.addEventListener('resize', () => this.resize());
 
     state.subscribe(() => this.draw());
+    window.addEventListener('themechange', () => this.draw());
 
     this.initEvents();
   }
@@ -77,8 +79,8 @@ export class Canvas2DManager {
     const deskDpx = state.deskDepth * this.scale;
 
     this.ctx.save();
-    this.ctx.fillStyle = '#262f40';
-    this.ctx.strokeStyle = '#38bdf8';
+    this.ctx.fillStyle = cssVar('--blueprint-desk');
+    this.ctx.strokeStyle = cssVar('--blueprint-accent');
     this.ctx.lineWidth = 2;
 
     this.ctx.shadowColor = 'rgba(0, 0, 0, 0.4)';
@@ -90,8 +92,8 @@ export class Canvas2DManager {
 
     // Draw dimension tags for desk width and depth
     this.ctx.save();
-    this.ctx.fillStyle = '#94a3b8';
-    this.ctx.font = '500 12px Inter, sans-serif';
+    this.ctx.fillStyle = cssVar('--blueprint-label');
+    this.ctx.font = "500 12px 'Plus Jakarta Sans', sans-serif";
 
     // Width label above desk
     this.ctx.textAlign = 'center';
@@ -117,15 +119,15 @@ export class Canvas2DManager {
       this.ctx.translate(pos.x, pos.y);
       this.ctx.rotate(item.rotation);
 
-      this.ctx.fillStyle = isSelected ? 'rgba(56, 189, 248, 0.25)' : 'rgba(30, 41, 59, 0.85)';
-      this.ctx.strokeStyle = isSelected ? '#38bdf8' : '#64748b';
+      this.ctx.fillStyle = isSelected ? cssVar('--blueprint-select-fill') : cssVar('--blueprint-item');
+      this.ctx.strokeStyle = isSelected ? cssVar('--blueprint-accent') : cssVar('--blueprint-item-stroke');
       this.ctx.lineWidth = isSelected ? 2.5 : 1.5;
 
       this.ctx.fillRect(-itemW / 2, -itemD / 2, itemW, itemD);
       this.ctx.strokeRect(-itemW / 2, -itemD / 2, itemW, itemD);
 
-      this.ctx.fillStyle = isSelected ? '#38bdf8' : '#cbd5e1';
-      this.ctx.font = '500 11px Inter, sans-serif';
+      this.ctx.fillStyle = isSelected ? cssVar('--blueprint-accent') : cssVar('--blueprint-item-label');
+      this.ctx.font = "500 11px 'Plus Jakarta Sans', sans-serif";
       this.ctx.textAlign = 'center';
       this.ctx.textBaseline = 'middle';
 
@@ -142,7 +144,7 @@ export class Canvas2DManager {
     const gridSize = 20 * this.scale; // 20cm grid lines
 
     this.ctx.save();
-    this.ctx.strokeStyle = 'rgba(51, 65, 85, 0.35)';
+    this.ctx.strokeStyle = cssVar('--blueprint-grid');
     this.ctx.lineWidth = 1;
 
     for (let x = 0; x < w; x += gridSize) {

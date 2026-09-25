@@ -1,22 +1,22 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
-  <defs>
-    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0f172a"/>
-      <stop offset="100%" stop-color="#1e293b"/>
-    </linearGradient>
-    <linearGradient id="iconGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#38bdf8"/>
-      <stop offset="100%" stop-color="#c084fc"/>
-    </linearGradient>
-    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="4" result="blur" />
-      <feComposite in="SourceGraphic" in2="blur" operator="over" />
-    </filter>
-  </defs>
-  <!-- Background Rounded Shield -->
-  <rect x="8" y="8" width="112" height="112" rx="28" fill="url(#bgGrad)" stroke="#38bdf8" stroke-width="4" />
-  <!-- Desk Base Sill -->
-  <rect x="28" y="90" width="72" height="8" rx="4" fill="#334155" />
-  <!-- Lightning Bolt Studio Icon -->
-  <path d="M 72 20 L 36 68 L 62 68 L 52 108 L 92 56 L 66 56 Z" fill="url(#iconGrad)" filter="url(#glow)" />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Borderless Cedar glyph; adapts to the browser chrome via prefers-color-scheme.
+       A monitor on a timber desk. -->
+  <style>
+    .fg { stroke: #1f513f; }
+    .stand { fill: #1f513f; }
+    .desk { fill: #8b5a2b; }
+    .glow { fill: #b8860b; }
+    @media (prefers-color-scheme: dark) {
+      .fg { stroke: #f4f2ed; }
+      .stand { fill: #f4f2ed; }
+      .desk { fill: #c08552; }
+      .glow { fill: #d89f28; }
+    }
+  </style>
+  <rect class="fg" x="12" y="7" width="40" height="27" rx="4" stroke-width="5"/>
+  <rect class="glow" x="20" y="16" width="14" height="4.5" rx="2.25"/>
+  <rect class="stand" x="28.5" y="34" width="7" height="10"/>
+  <rect class="desk" x="4" y="44" width="56" height="7" rx="3.5"/>
+  <rect class="stand" x="9" y="51" width="5" height="10" rx="2"/>
+  <rect class="stand" x="50" y="51" width="5" height="10" rx="2"/>
 </svg>
