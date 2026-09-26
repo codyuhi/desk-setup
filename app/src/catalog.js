@@ -7,7 +7,7 @@ export const CATEGORIES = [
   { id: 'peripherals', name: 'Keyboards & Mice', icon: 'keyboard' },
   { id: 'audio', name: 'Audio & Acoustics', icon: 'volume-2' },
   { id: 'lighting', name: 'Lighting & RGB', icon: 'sun' },
-  { id: 'decor', name: 'Decor & Storage', icon: 'sparkles' },
+  { id: 'decor', name: 'Decor & Storage', icon: 'box' },
 ];
 
 export const FINISHES = {
