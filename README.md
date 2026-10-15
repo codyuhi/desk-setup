@@ -8,6 +8,7 @@ This repository holds the contents for a frontend-only website. The website, Des
 
 - `html-app`: A version of the Desk Setup application built using only HTML, CSS, and JavaScript
 - `react-app`: A version of the Desk Setup application built using ReactJS
+- `android`: Native Android client (see `android/README.md`)
 
 ## How to run the app
 

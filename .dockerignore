@@ -1,0 +1,2 @@
+# The web image only needs app/ (see Dockerfile); keep the Android project out of the build context.
+android/

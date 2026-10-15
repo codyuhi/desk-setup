@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="cedar_spruce">#1F513F</color>
+    <color name="canvas">#EBE7DF</color>
+    <color name="glyph">#1F513F</color>
+    <color name="glyph_desk">#8B5A2B</color>
+    <color name="glyph_glow">#B8860B</color>
+</resources>

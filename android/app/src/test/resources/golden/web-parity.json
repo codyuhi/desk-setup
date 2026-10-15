@@ -1,0 +1,782 @@
+[
+  {
+    "name": "preset-developer",
+    "setup": {
+      "deskFinish": "walnut",
+      "deskHeight": 74,
+      "deskWidth": 160,
+      "deskDepth": 80,
+      "placedItems": [
+        {
+          "catalogId": "monitor-34-ultrawide",
+          "x": 0,
+          "z": -22,
+          "rotation": 0
+        },
+        {
+          "catalogId": "monitor-27-vertical",
+          "x": 56,
+          "z": -18,
+          "rotation": -0.3
+        },
+        {
+          "catalogId": "laptop-stand-open",
+          "x": -56,
+          "z": 2,
+          "rotation": 0.4
+        },
+        {
+          "catalogId": "keyboard-mech-tkl",
+          "x": -4,
+          "z": 12,
+          "rotation": 0
+        },
+        {
+          "catalogId": "mouse-wireless-ergonomic",
+          "x": 26,
+          "z": 14,
+          "rotation": 0
+        },
+        {
+          "catalogId": "deskpad-felt-xl",
+          "x": 2,
+          "z": 10,
+          "rotation": 0
+        },
+        {
+          "catalogId": "light-monitor-bar",
+          "x": 0,
+          "z": -22,
+          "rotation": 0
+        },
+        {
+          "catalogId": "decor-monstera-plant",
+          "x": 64,
+          "z": 18,
+          "rotation": 0
+        },
+        {
+          "catalogId": "decor-coffee-mug",
+          "x": -36,
+          "z": 22,
+          "rotation": 0
+        }
+      ]
+    },
+    "budget": {
+      "totalPrice": 4575,
+      "breakdown": [
+        {
+          "name": "Desk Frame & Surface (Dark Walnut - 160×80cm)",
+          "price": 649
+        },
+        {
+          "name": "34\" Curved Ultrawide 144Hz",
+          "price": 599
+        },
+        {
+          "name": "27\" Vertical Coding Monitor",
+          "price": 349
+        },
+        {
+          "name": "16\" Pro Laptop on Ergonomic Stand",
+          "price": 2499
+        },
+        {
+          "name": "Custom Mechanical Keyboard (TKL)",
+          "price": 189
+        },
+        {
+          "name": "Precision Wireless Ergonomic Mouse",
+          "price": 99
+        },
+        {
+          "name": "Merino Wool Felt Desk Pad (XL)",
+          "price": 49
+        },
+        {
+          "name": "Asymmetric Monitor Screen Bar Light",
+          "price": 89
+        },
+        {
+          "name": "Potted Monstera Deliciosa Plant",
+          "price": 35
+        },
+        {
+          "name": "Ceramic Espresso Mug",
+          "price": 18
+        }
+      ]
+    },
+    "ergonomics": {
+      "score": 100,
+      "tips": [
+        "✨ Monitor light bar reduces eye fatigue during evening work."
+      ]
+    }
+  },
+  {
+    "name": "preset-gamer",
+    "setup": {
+      "deskFinish": "black",
+      "deskHeight": 72,
+      "deskWidth": 160,
+      "deskDepth": 80,
+      "placedItems": [
+        {
+          "catalogId": "monitor-27-4k-dual",
+          "x": 0,
+          "z": -20,
+          "rotation": 0
+        },
+        {
+          "catalogId": "speakers-studio-pair",
+          "x": 0,
+          "z": -18,
+          "rotation": 0
+        },
+        {
+          "catalogId": "pc-rgb-gaming",
+          "x": 50,
+          "z": 18,
+          "rotation": 0
+        },
+        {
+          "catalogId": "keyboard-mech-tkl",
+          "x": -4,
+          "z": 12,
+          "rotation": 0
+        },
+        {
+          "catalogId": "mouse-wireless-ergonomic",
+          "x": 24,
+          "z": 14,
+          "rotation": 0
+        },
+        {
+          "catalogId": "deskpad-felt-xl",
+          "x": 2,
+          "z": 10,
+          "rotation": 0
+        },
+        {
+          "catalogId": "headphones-audiophile-stand",
+          "x": -48,
+          "z": 18,
+          "rotation": 0
+        },
+        {
+          "catalogId": "light-rgb-strip-backlight",
+          "x": 0,
+          "z": -38,
+          "rotation": 0
+        }
+      ]
+    },
+    "budget": {
+      "totalPrice": 4407,
+      "breakdown": [
+        {
+          "name": "Desk Frame & Surface (Matte Obsidian - 160×80cm)",
+          "price": 499
+        },
+        {
+          "name": "Dual 27\" 4K Colorist Setup",
+          "price": 849
+        },
+        {
+          "name": "5\" Active Studio Monitors (Pair)",
+          "price": 399
+        },
+        {
+          "name": "Custom Glass RGB PC Tower",
+          "price": 1899
+        },
+        {
+          "name": "Custom Mechanical Keyboard (TKL)",
+          "price": 189
+        },
+        {
+          "name": "Precision Wireless Ergonomic Mouse",
+          "price": 99
+        },
+        {
+          "name": "Merino Wool Felt Desk Pad (XL)",
+          "price": 49
+        },
+        {
+          "name": "Open-Back Headphones on Wood Stand",
+          "price": 379
+        },
+        {
+          "name": "Smart Dynamic Ambient RGB LED Strip",
+          "price": 45
+        }
+      ]
+    },
+    "ergonomics": {
+      "score": 100,
+      "tips": [
+        "✅ Ideal ergonomic alignment! Elbows at 90°, eyes aligned with top third of screen."
+      ]
+    }
+  },
+  {
+    "name": "preset-minimalist",
+    "setup": {
+      "deskFinish": "oak",
+      "deskHeight": 74,
+      "deskWidth": 160,
+      "deskDepth": 80,
+      "placedItems": [
+        {
+          "catalogId": "monitor-34-ultrawide",
+          "x": 0,
+          "z": -18,
+          "rotation": 0
+        },
+        {
+          "catalogId": "mac-studio-mini",
+          "x": 54,
+          "z": -18,
+          "rotation": 0
+        },
+        {
+          "catalogId": "keyboard-mech-tkl",
+          "x": -2,
+          "z": 12,
+          "rotation": 0
+        },
+        {
+          "catalogId": "mouse-wireless-ergonomic",
+          "x": 26,
+          "z": 14,
+          "rotation": 0
+        },
+        {
+          "catalogId": "deskpad-felt-xl",
+          "x": 2,
+          "z": 10,
+          "rotation": 0
+        },
+        {
+          "catalogId": "light-desk-lamp-gmatrix",
+          "x": -56,
+          "z": -15,
+          "rotation": 0
+        },
+        {
+          "catalogId": "decor-monstera-plant",
+          "x": 56,
+          "z": 18,
+          "rotation": 0
+        }
+      ]
+    },
+    "budget": {
+      "totalPrice": 3638,
+      "breakdown": [
+        {
+          "name": "Desk Frame & Surface (Natural Oak - 160×80cm)",
+          "price": 549
+        },
+        {
+          "name": "34\" Curved Ultrawide 144Hz",
+          "price": 599
+        },
+        {
+          "name": "Aluminum Compact Workstation",
+          "price": 1999
+        },
+        {
+          "name": "Custom Mechanical Keyboard (TKL)",
+          "price": 189
+        },
+        {
+          "name": "Precision Wireless Ergonomic Mouse",
+          "price": 99
+        },
+        {
+          "name": "Merino Wool Felt Desk Pad (XL)",
+          "price": 49
+        },
+        {
+          "name": "Architectural LED Swing-Arm Lamp",
+          "price": 119
+        },
+        {
+          "name": "Potted Monstera Deliciosa Plant",
+          "price": 35
+        }
+      ]
+    },
+    "ergonomics": {
+      "score": 100,
+      "tips": [
+        "✅ Ideal ergonomic alignment! Elbows at 90°, eyes aligned with top third of screen."
+      ]
+    }
+  },
+  {
+    "name": "gamer-tall-wide",
+    "setup": {
+      "deskFinish": "black",
+      "deskHeight": 85,
+      "deskWidth": 200,
+      "deskDepth": 100,
+      "placedItems": [
+        {
+          "catalogId": "monitor-27-4k-dual",
+          "x": 0,
+          "z": -20,
+          "rotation": 0
+        },
+        {
+          "catalogId": "speakers-studio-pair",
+          "x": 0,
+          "z": -18,
+          "rotation": 0
+        },
+        {
+          "catalogId": "pc-rgb-gaming",
+          "x": 50,
+          "z": 18,
+          "rotation": 0
+        },
+        {
+          "catalogId": "keyboard-mech-tkl",
+          "x": -4,
+          "z": 12,
+          "rotation": 0
+        },
+        {
+          "catalogId": "mouse-wireless-ergonomic",
+          "x": 24,
+          "z": 14,
+          "rotation": 0
+        },
+        {
+          "catalogId": "deskpad-felt-xl",
+          "x": 2,
+          "z": 10,
+          "rotation": 0
+        },
+        {
+          "catalogId": "headphones-audiophile-stand",
+          "x": -48,
+          "z": 18,
+          "rotation": 0
+        },
+        {
+          "catalogId": "light-rgb-strip-backlight",
+          "x": 0,
+          "z": -38,
+          "rotation": 0
+        }
+      ]
+    },
+    "budget": {
+      "totalPrice": 4688,
+      "breakdown": [
+        {
+          "name": "Desk Frame & Surface (Matte Obsidian - 200×100cm)",
+          "price": 780
+        },
+        {
+          "name": "Dual 27\" 4K Colorist Setup",
+          "price": 849
+        },
+        {
+          "name": "5\" Active Studio Monitors (Pair)",
+          "price": 399
+        },
+        {
+          "name": "Custom Glass RGB PC Tower",
+          "price": 1899
+        },
+        {
+          "name": "Custom Mechanical Keyboard (TKL)",
+          "price": 189
+        },
+        {
+          "name": "Precision Wireless Ergonomic Mouse",
+          "price": 99
+        },
+        {
+          "name": "Merino Wool Felt Desk Pad (XL)",
+          "price": 49
+        },
+        {
+          "name": "Open-Back Headphones on Wood Stand",
+          "price": 379
+        },
+        {
+          "name": "Smart Dynamic Ambient RGB LED Strip",
+          "price": 45
+        }
+      ]
+    },
+    "ergonomics": {
+      "score": 90,
+      "tips": [
+        "⚠️ Desk height is above 80cm; consider adding a footrest or adjusting chair height."
+      ]
+    }
+  },
+  {
+    "name": "minimal-low-small-glass",
+    "setup": {
+      "deskFinish": "glass",
+      "deskHeight": 66,
+      "deskWidth": 120,
+      "deskDepth": 60,
+      "placedItems": [
+        {
+          "catalogId": "monitor-34-ultrawide",
+          "x": 0,
+          "z": -18,
+          "rotation": 0
+        },
+        {
+          "catalogId": "mac-studio-mini",
+          "x": 54,
+          "z": -18,
+          "rotation": 0
+        },
+        {
+          "catalogId": "keyboard-mech-tkl",
+          "x": -2,
+          "z": 12,
+          "rotation": 0
+        },
+        {
+          "catalogId": "mouse-wireless-ergonomic",
+          "x": 26,
+          "z": 14,
+          "rotation": 0
+        },
+        {
+          "catalogId": "deskpad-felt-xl",
+          "x": 2,
+          "z": 10,
+          "rotation": 0
+        },
+        {
+          "catalogId": "light-desk-lamp-gmatrix",
+          "x": -56,
+          "z": -15,
+          "rotation": 0
+        },
+        {
+          "catalogId": "decor-monstera-plant",
+          "x": 56,
+          "z": 18,
+          "rotation": 0
+        }
+      ]
+    },
+    "budget": {
+      "totalPrice": 3370,
+      "breakdown": [
+        {
+          "name": "Desk Frame & Surface (Smoked Glass - 120×60cm)",
+          "price": 281
+        },
+        {
+          "name": "34\" Curved Ultrawide 144Hz",
+          "price": 599
+        },
+        {
+          "name": "Aluminum Compact Workstation",
+          "price": 1999
+        },
+        {
+          "name": "Custom Mechanical Keyboard (TKL)",
+          "price": 189
+        },
+        {
+          "name": "Precision Wireless Ergonomic Mouse",
+          "price": 99
+        },
+        {
+          "name": "Merino Wool Felt Desk Pad (XL)",
+          "price": 49
+        },
+        {
+          "name": "Architectural LED Swing-Arm Lamp",
+          "price": 119
+        },
+        {
+          "name": "Potted Monstera Deliciosa Plant",
+          "price": 35
+        }
+      ]
+    },
+    "ergonomics": {
+      "score": 90,
+      "tips": [
+        "⚠️ Desk height is low; ensure sufficient leg clearance."
+      ]
+    }
+  },
+  {
+    "name": "empty",
+    "setup": {
+      "deskFinish": "glass",
+      "deskHeight": 66,
+      "deskWidth": 120,
+      "deskDepth": 60,
+      "placedItems": []
+    },
+    "budget": {
+      "totalPrice": 281,
+      "breakdown": [
+        {
+          "name": "Desk Frame & Surface (Smoked Glass - 120×60cm)",
+          "price": 281
+        }
+      ]
+    },
+    "ergonomics": {
+      "score": 55,
+      "tips": [
+        "⚠️ Desk height is low; ensure sufficient leg clearance.",
+        "⚠️ No elevated display detected. Looking down causes neck strain.",
+        "💡 Add an ergonomic keyboard positioned 15-20cm from desk edge."
+      ]
+    }
+  },
+  {
+    "name": "clamped",
+    "setup": {
+      "deskFinish": "glass",
+      "deskHeight": 65,
+      "deskWidth": 240,
+      "deskDepth": 50,
+      "placedItems": []
+    },
+    "budget": {
+      "totalPrice": 468,
+      "breakdown": [
+        {
+          "name": "Desk Frame & Surface (Smoked Glass - 240×50cm)",
+          "price": 468
+        }
+      ]
+    },
+    "ergonomics": {
+      "score": 55,
+      "tips": [
+        "⚠️ Desk height is low; ensure sufficient leg clearance.",
+        "⚠️ No elevated display detected. Looking down causes neck strain.",
+        "💡 Add an ergonomic keyboard positioned 15-20cm from desk edge."
+      ]
+    }
+  },
+  {
+    "name": "everything-odd-size",
+    "setup": {
+      "deskFinish": "white",
+      "deskHeight": 74,
+      "deskWidth": 137,
+      "deskDepth": 73,
+      "placedItems": [
+        {
+          "catalogId": "monitor-34-ultrawide",
+          "x": 1,
+          "z": 2,
+          "rotation": 0
+        },
+        {
+          "catalogId": "monitor-27-4k-dual",
+          "x": 1,
+          "z": 2,
+          "rotation": 0
+        },
+        {
+          "catalogId": "monitor-27-vertical",
+          "x": 1,
+          "z": 2,
+          "rotation": 0
+        },
+        {
+          "catalogId": "monitor-49-super-ultrawide",
+          "x": 1,
+          "z": 2,
+          "rotation": 0
+        },
+        {
+          "catalogId": "pc-rgb-gaming",
+          "x": 1,
+          "z": 2,
+          "rotation": 0
+        },
+        {
+          "catalogId": "mac-studio-mini",
+          "x": 1,
+          "z": 2,
+          "rotation": 0
+        },
+        {
+          "catalogId": "laptop-stand-open",
+          "x": 1,
+          "z": 2,
+          "rotation": 0
+        },
+        {
+          "catalogId": "keyboard-mech-tkl",
+          "x": 1,
+          "z": 2,
+          "rotation": 0
+        },
+        {
+          "catalogId": "deskpad-felt-xl",
+          "x": 1,
+          "z": 2,
+          "rotation": 0
+        },
+        {
+          "catalogId": "mouse-wireless-ergonomic",
+          "x": 1,
+          "z": 2,
+          "rotation": 0
+        },
+        {
+          "catalogId": "speakers-studio-pair",
+          "x": 1,
+          "z": 2,
+          "rotation": 0
+        },
+        {
+          "catalogId": "headphones-audiophile-stand",
+          "x": 1,
+          "z": 2,
+          "rotation": 0
+        },
+        {
+          "catalogId": "light-monitor-bar",
+          "x": 1,
+          "z": 2,
+          "rotation": 0
+        },
+        {
+          "catalogId": "light-desk-lamp-gmatrix",
+          "x": 1,
+          "z": 2,
+          "rotation": 0
+        },
+        {
+          "catalogId": "light-rgb-strip-backlight",
+          "x": 1,
+          "z": 2,
+          "rotation": 0
+        },
+        {
+          "catalogId": "decor-monstera-plant",
+          "x": 1,
+          "z": 2,
+          "rotation": 0
+        },
+        {
+          "catalogId": "decor-pegboard-wall",
+          "x": 1,
+          "z": 2,
+          "rotation": 0
+        },
+        {
+          "catalogId": "decor-coffee-mug",
+          "x": 1,
+          "z": 2,
+          "rotation": 0
+        }
+      ]
+    },
+    "budget": {
+      "totalPrice": 11279,
+      "breakdown": [
+        {
+          "name": "Desk Frame & Surface (Alpine White - 137×73cm)",
+          "price": 390
+        },
+        {
+          "name": "34\" Curved Ultrawide 144Hz",
+          "price": 599
+        },
+        {
+          "name": "Dual 27\" 4K Colorist Setup",
+          "price": 849
+        },
+        {
+          "name": "27\" Vertical Coding Monitor",
+          "price": 349
+        },
+        {
+          "name": "49\" Super Ultrawide 32:9",
+          "price": 1199
+        },
+        {
+          "name": "Custom Glass RGB PC Tower",
+          "price": 1899
+        },
+        {
+          "name": "Aluminum Compact Workstation",
+          "price": 1999
+        },
+        {
+          "name": "16\" Pro Laptop on Ergonomic Stand",
+          "price": 2499
+        },
+        {
+          "name": "Custom Mechanical Keyboard (TKL)",
+          "price": 189
+        },
+        {
+          "name": "Merino Wool Felt Desk Pad (XL)",
+          "price": 49
+        },
+        {
+          "name": "Precision Wireless Ergonomic Mouse",
+          "price": 99
+        },
+        {
+          "name": "5\" Active Studio Monitors (Pair)",
+          "price": 399
+        },
+        {
+          "name": "Open-Back Headphones on Wood Stand",
+          "price": 379
+        },
+        {
+          "name": "Asymmetric Monitor Screen Bar Light",
+          "price": 89
+        },
+        {
+          "name": "Architectural LED Swing-Arm Lamp",
+          "price": 119
+        },
+        {
+          "name": "Smart Dynamic Ambient RGB LED Strip",
+          "price": 45
+        },
+        {
+          "name": "Potted Monstera Deliciosa Plant",
+          "price": 35
+        },
+        {
+          "name": "Modular Wall Pegboard Organizer",
+          "price": 75
+        },
+        {
+          "name": "Ceramic Espresso Mug",
+          "price": 18
+        }
+      ]
+    },
+    "ergonomics": {
+      "score": 100,
+      "tips": [
+        "✨ Monitor light bar reduces eye fatigue during evening work."
+      ]
+    }
+  }
+]

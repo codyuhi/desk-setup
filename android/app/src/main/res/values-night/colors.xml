@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="canvas">#161614</color>
+    <color name="glyph">#F4F2ED</color>
+    <color name="glyph_desk">#C08552</color>
+    <color name="glyph_glow">#D89F28</color>
+</resources>
