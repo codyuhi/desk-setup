@@ -1,7 +1,6 @@
 # Desk Setup: agent notes
 
 - `app/`: the web app (Vite + Three.js, frontend-only), built by the root `Dockerfile` and deployed to the minipc cluster.
-- `archive/`: the old HTML version; not built.
 
 ## Android client
 
