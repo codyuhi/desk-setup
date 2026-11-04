@@ -235,6 +235,8 @@ export class Scene3DManager {
 
       if (catItem.threeType === 'pegboardWall') {
         meshGroup.position.set(posX, deskTopY + 0.35, -0.42);
+      } else if (catItem.underDesk) {
+        meshGroup.position.set(posX, deskTopY - 0.035, posZ);
       } else {
         meshGroup.position.set(posX, deskTopY, posZ);
       }

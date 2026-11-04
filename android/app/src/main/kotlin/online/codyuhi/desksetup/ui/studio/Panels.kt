@@ -75,6 +75,7 @@ fun categoryIcon(id: String): ImageVector = when (id) {
     "peripherals" -> Lucide.Keyboard
     "audio" -> Lucide.Volume2
     "lighting" -> Lucide.Lightbulb
+    "cable-management" -> Lucide.Zap
     else -> Lucide.Box
 }
 
@@ -273,9 +274,10 @@ private fun ItemTab(setup: DeskSetup, selectedId: String?, actions: StudioAction
         ValueRow("Rotation", "${(item.rotation * 180 / PI).roundToInt()}°")
         ValueRow("Price", money(cat.price))
     }
-    Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-        CedarOutlinedButton("Rotate 45°", actions.rotate45, Modifier.weight(1f), icon = Lucide.RotateCw)
-        CedarOutlinedButton("Remove Item", actions.delete, Modifier.weight(1f), icon = Lucide.Trash2, danger = true)
+    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        CedarOutlinedButton("Rotate", actions.rotate45, Modifier.weight(1f), icon = Lucide.RotateCw)
+        CedarOutlinedButton("Duplicate", actions.duplicate, Modifier.weight(1f), icon = Lucide.Copy)
+        CedarOutlinedButton("Remove", actions.delete, Modifier.weight(1f), icon = Lucide.Trash2, danger = true)
     }
 }
 
@@ -405,6 +407,7 @@ class StudioActions(
     val setHeightLive: (Int) -> Unit,
     val endEdit: () -> Unit,
     val rotate45: () -> Unit,
+    val duplicate: () -> Unit,
     val delete: () -> Unit,
     val loadPreset: (String) -> Unit,
     val requestSave: () -> Unit,

@@ -8,6 +8,7 @@ export const CATEGORIES = [
   { id: 'audio', name: 'Audio & Acoustics', icon: 'volume-2' },
   { id: 'lighting', name: 'Lighting & RGB', icon: 'sun' },
   { id: 'decor', name: 'Decor & Storage', icon: 'box' },
+  { id: 'cable-management', name: 'Cable Management', icon: 'zap' },
 ];
 
 export const FINISHES = {
@@ -63,7 +64,8 @@ export const CATALOG_ITEMS = [
     dimensions: { width: 81, depth: 22, height: 45 },
     defaultColor: '#27272a',
     description: 'UWQHD 1440p immersive curved panel with slim bezel.',
-    threeType: 'monitorUltrawide'
+    threeType: 'monitorUltrawide',
+    hasClamp: true,
   },
   {
     id: 'monitor-27-4k-dual',
@@ -73,7 +75,8 @@ export const CATALOG_ITEMS = [
     dimensions: { width: 124, depth: 20, height: 44 },
     defaultColor: '#3f3f46',
     description: 'Dual IPS 4K screens mounted on a gas-spring dual arm.',
-    threeType: 'monitorDual27'
+    threeType: 'monitorDual27',
+    hasClamp: true,
   },
   {
     id: 'monitor-27-vertical',
@@ -83,7 +86,8 @@ export const CATALOG_ITEMS = [
     dimensions: { width: 36, depth: 18, height: 62 },
     defaultColor: '#27272a',
     description: 'Portrait orientation monitor optimized for code review & document reading.',
-    threeType: 'monitorVertical'
+    threeType: 'monitorVertical',
+    hasClamp: true,
   },
   {
     id: 'monitor-49-super-ultrawide',
@@ -93,7 +97,8 @@ export const CATALOG_ITEMS = [
     dimensions: { width: 119, depth: 28, height: 52 },
     defaultColor: '#18181b',
     description: 'Replaces dual monitors with a seamless panoramic curve display.',
-    threeType: 'monitorSuperUltrawide'
+    threeType: 'monitorSuperUltrawide',
+    hasClamp: true,
   },
 
   // --- COMPUTERS ---
@@ -206,7 +211,8 @@ export const CATALOG_ITEMS = [
     defaultColor: '#3f3f46',
     lightColor: '#ffffff',
     description: 'Dual-joint articulated lamp with touch dimmer & color temperature dial.',
-    threeType: 'architectLamp'
+    threeType: 'architectLamp',
+    hasClamp: true,
   },
   {
     id: 'light-rgb-strip-backlight',
@@ -250,6 +256,41 @@ export const CATALOG_ITEMS = [
     defaultColor: '#334155',
     description: 'Handcrafted matte ceramic coffee mug on a cork coaster.',
     threeType: 'coffeeMug'
+  },
+
+  // --- CABLE MANAGEMENT ---
+  {
+    id: 'cable-tray-mesh',
+    name: 'Under-Desk Steel Mesh Cable Tray',
+    category: 'cable-management',
+    price: 39,
+    dimensions: { width: 60, depth: 16, height: 12 },
+    defaultColor: '#334155',
+    description: 'Ventilated steel mesh under-desk tray to house power bricks and route cables.',
+    threeType: 'cableTrayMesh',
+    underDesk: true,
+  },
+  {
+    id: 'power-strip-magnetic',
+    name: 'Magnetic Smart Power Strip (8-Outlet)',
+    category: 'cable-management',
+    price: 49,
+    dimensions: { width: 32, depth: 8, height: 4 },
+    defaultColor: '#1e293b',
+    description: 'Heavy-duty surge protector with magnetic under-desk mounting brackets and USB-C PD.',
+    threeType: 'powerStripMagnetic',
+    underDesk: true,
+  },
+  {
+    id: 'cable-spine-vertebrae',
+    name: 'Articulated Wire Management Spine',
+    category: 'cable-management',
+    price: 29,
+    dimensions: { width: 8, depth: 8, height: 75 },
+    defaultColor: '#475569',
+    description: 'Flexible vertebrae cable spine guiding wires smoothly from desk to floor through sit-stand motion.',
+    threeType: 'cableSpineVertebrae',
+    underDesk: true,
   }
 ];
 

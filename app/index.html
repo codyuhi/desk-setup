@@ -143,6 +143,13 @@
             <div class="divider-vert"></div>
 
             <div class="tool-group">
+              <button id="btnSnapGrid" class="tool-btn" title="Toggle Snap to Grid (5cm) (S)">🧲<span class="tool-label desktop-only"> Snap</span></button>
+              <button id="btnToggleUnderDesk" class="tool-btn" title="Toggle Under-Desk Frame Clearance Overlay (U)">🩻<span class="tool-label desktop-only"> Under-Desk</span></button>
+            </div>
+
+            <div class="divider-vert"></div>
+
+            <div class="tool-group">
               <button id="btnUndo" class="tool-btn" title="Undo (Cmd+Z)">↩️</button>
               <button id="btnRedo" class="tool-btn" title="Redo (Cmd+Y)">↪️</button>
               <button id="btnDeleteItem" class="tool-btn desktop-only" title="Delete Selected Item (Del)">🗑️</button>
@@ -156,6 +163,9 @@
               <span id="floatingItemTitle" class="floating-item-title">Item Name</span>
             </div>
             <div class="floating-item-actions">
+              <button id="btnFloatingDuplicate" class="btn-floating-action" title="Duplicate Item (Cmd+D / Ctrl+D)">
+                <span>📑 Duplicate</span>
+              </button>
               <button id="btnFloatingRotate" class="btn-floating-action" title="Rotate 45°">
                 <span>🔄 45°</span>
               </button>
@@ -227,6 +237,23 @@
                 <input type="range" id="sliderDeskHeightMobile" min="65" max="120" value="74" step="1" style="flex: 1;" />
                 <span id="textDeskHeightMobile" style="width: 48px; text-align: right;">74cm</span>
               </div>
+            </div>
+          </div>
+
+          <!-- WORKSPACE & CLEARANCE ASSISTS -->
+          <div class="inspector-section" id="sectionWorkspaceAssists">
+            <div class="section-title">
+              <span>Canvas & Frame Assists</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <label class="assist-toggle-label" style="display: flex; align-items: center; justify-content: space-between; font-size: 13px; color: var(--text-main); cursor: pointer;">
+                <span>🩻 Under-Desk Frame Layer</span>
+                <input type="checkbox" id="checkUnderDeskInspector" style="accent-color: var(--accent);" />
+              </label>
+              <label class="assist-toggle-label" style="display: flex; align-items: center; justify-content: space-between; font-size: 13px; color: var(--text-main); cursor: pointer;">
+                <span>🧲 Snap to Grid (5cm)</span>
+                <input type="checkbox" id="checkSnapGridInspector" style="accent-color: var(--accent);" />
+              </label>
             </div>
           </div>
 

@@ -149,6 +149,26 @@ function initUI() {
     showToast('Redo action');
   });
 
+  const btnSnapGrid = document.getElementById('btnSnapGrid');
+  const checkSnapGridInspector = document.getElementById('checkSnapGridInspector');
+  const toggleSnap = () => {
+    const active = state.toggleSnapToGrid();
+    showToast(active ? 'Snap to Grid enabled (5cm)' : 'Snap to Grid disabled');
+    updateAssistControls();
+  };
+  btnSnapGrid?.addEventListener('click', toggleSnap);
+  checkSnapGridInspector?.addEventListener('change', toggleSnap);
+
+  const btnToggleUnderDesk = document.getElementById('btnToggleUnderDesk');
+  const checkUnderDeskInspector = document.getElementById('checkUnderDeskInspector');
+  const toggleUnderDesk = () => {
+    const active = state.toggleUnderDeskFrame();
+    showToast(active ? 'Under-Desk Frame overlay enabled' : 'Under-Desk Frame overlay disabled');
+    updateAssistControls();
+  };
+  btnToggleUnderDesk?.addEventListener('click', toggleUnderDesk);
+  checkUnderDeskInspector?.addEventListener('change', toggleUnderDesk);
+
   document.getElementById('btnDeleteItem')?.addEventListener('click', () => {
     if (state.selectedItemId) {
       state.deleteSelectedItem();
@@ -334,6 +354,13 @@ function initMobileUI() {
   });
 
   // Floating Item Actions
+  document.getElementById('btnFloatingDuplicate')?.addEventListener('click', () => {
+    if (state.selectedItemId) {
+      const cloned = state.duplicateSelectedItem();
+      if (cloned) showToast('Item duplicated!');
+    }
+  });
+
   document.getElementById('btnFloatingRotate')?.addEventListener('click', () => {
     if (state.selectedItemId) {
       const item = state.placedItems.find((i) => i.id === state.selectedItemId);
@@ -453,14 +480,36 @@ function renderCatalog() {
 }
 
 function handleKeyboardShortcuts(e) {
-  if (e.key === 'r' || e.key === 'R') {
+  if ((e.metaKey || e.ctrlKey) && (e.key === 'd' || e.key === 'D')) {
+    e.preventDefault();
     if (state.selectedItemId) {
+      const cloned = state.duplicateSelectedItem();
+      if (cloned) showToast('Item duplicated!');
+    }
+    return;
+  }
+  if (e.key === 'r' || e.key === 'R') {
+    if (state.selectedItemId && document.activeElement.tagName !== 'INPUT') {
       const item = state.placedItems.find((i) => i.id === state.selectedItemId);
       if (item) {
         const newRot = (item.rotation + Math.PI / 4) % (Math.PI * 2);
         state.updateItemRotation(item.id, newRot);
         showToast('Rotated item 45°');
       }
+    }
+  }
+  if ((e.key === 's' || e.key === 'S') && !e.ctrlKey && !e.metaKey) {
+    if (document.activeElement.tagName !== 'INPUT') {
+      const active = state.toggleSnapToGrid();
+      showToast(active ? 'Snap to Grid enabled (5cm)' : 'Snap to Grid disabled');
+      updateAssistControls();
+    }
+  }
+  if ((e.key === 'u' || e.key === 'U') && !e.ctrlKey && !e.metaKey) {
+    if (document.activeElement.tagName !== 'INPUT') {
+      const active = state.toggleUnderDeskFrame();
+      showToast(active ? 'Under-Desk Frame overlay enabled' : 'Under-Desk Frame overlay disabled');
+      updateAssistControls();
     }
   }
   if (e.key === 'Delete' || e.key === 'Backspace') {
@@ -482,6 +531,8 @@ function handleKeyboardShortcuts(e) {
 }
 
 function updateInspectorAndBudget() {
+  updateAssistControls();
+
   const inspectorDetails = document.getElementById('selectedItemDetails');
   const floatingBar = document.getElementById('selectedItemFloatingBar');
   const floatingTitle = document.getElementById('floatingItemTitle');
@@ -492,6 +543,24 @@ function updateInspectorAndBudget() {
 
     if (cat && selected) {
       if (inspectorDetails) {
+        const collision = state.checkClampCollision(selected);
+        let warningHtml = '';
+        if (collision) {
+          if (collision.collides) {
+            warningHtml = `
+              <div style="margin: 8px 0; padding: 8px 10px; background: rgba(239, 68, 68, 0.15); border: 1px solid var(--danger); border-radius: 6px; color: var(--danger); font-size: 11px; font-weight: 600; line-height: 1.3;">
+                ⚠️ Clamp Collision: ${collision.reason}
+              </div>
+            `;
+          } else {
+            warningHtml = `
+              <div style="margin: 8px 0; padding: 6px 10px; background: rgba(16, 185, 129, 0.12); border: 1px solid var(--accent-emerald); border-radius: 6px; color: var(--accent-emerald); font-size: 11px; font-weight: 500;">
+                ✓ Clamp Mounting: Clear & Secure
+              </div>
+            `;
+          }
+        }
+
         inspectorDetails.innerHTML = `
           <div style="font-weight: 600; color: var(--text-main); margin-bottom: 4px;">${cat.name}</div>
           <div style="margin-bottom: 8px;">Category: <span style="color: var(--accent-cyan);">${cat.category}</span></div>
@@ -500,10 +569,21 @@ function updateInspectorAndBudget() {
             <div>Z: <strong style="color: var(--text-main);">${selected.z}cm</strong></div>
             <div>Rot: <strong style="color: var(--text-main);">${Math.round((selected.rotation * 180) / Math.PI)}°</strong></div>
           </div>
-          <button id="btnInspectorDelete" class="btn" style="width: 100%; color: var(--danger); border-color: color-mix(in srgb, var(--danger) 35%, transparent);">
-            Remove Item
-          </button>
+          ${warningHtml}
+          <div style="display: flex; gap: 8px; margin-top: 8px;">
+            <button id="btnInspectorDuplicate" class="btn" style="flex: 1;">
+              📑 Duplicate
+            </button>
+            <button id="btnInspectorDelete" class="btn" style="flex: 1; color: var(--danger); border-color: color-mix(in srgb, var(--danger) 35%, transparent);">
+              Remove
+            </button>
+          </div>
         `;
+
+        document.getElementById('btnInspectorDuplicate')?.addEventListener('click', () => {
+          const cloned = state.duplicateSelectedItem();
+          if (cloned) showToast('Item duplicated!');
+        });
 
         document.getElementById('btnInspectorDelete')?.addEventListener('click', () => {
           state.deleteSelectedItem();
@@ -589,4 +669,16 @@ function showToast(message) {
   setTimeout(() => {
     toast.classList.remove('show');
   }, 2500);
+}
+
+function updateAssistControls() {
+  const btnSnapGrid = document.getElementById('btnSnapGrid');
+  const checkSnapGrid = document.getElementById('checkSnapGridInspector');
+  if (btnSnapGrid) btnSnapGrid.classList.toggle('active', !!state.snapToGrid);
+  if (checkSnapGrid) checkSnapGrid.checked = !!state.snapToGrid;
+
+  const btnUnderDesk = document.getElementById('btnToggleUnderDesk');
+  const checkUnderDesk = document.getElementById('checkUnderDeskInspector');
+  if (btnUnderDesk) btnUnderDesk.classList.toggle('active', !!state.showUnderDeskFrame);
+  if (checkUnderDesk) checkUnderDesk.checked = !!state.showUnderDeskFrame;
 }

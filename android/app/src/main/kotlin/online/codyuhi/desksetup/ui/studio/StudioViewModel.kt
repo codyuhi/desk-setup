@@ -144,6 +144,25 @@ class StudioViewModel(
         toast("Rotated item 45°")
     }
 
+    fun duplicateSelected() {
+        val setup = current ?: return
+        val item = setup.item(_selectedId.value) ?: return
+        val cat = Catalog.item(item.catalogId) ?: return
+        val offset = 5.0
+        val halfW = (setup.deskWidth / 2.0) - 10.0
+        val halfD = (setup.deskDepth / 2.0) - 10.0
+        val cloned = PlacedItem(
+            DeskSetup.newItemId(),
+            item.catalogId,
+            (item.x + offset).coerceIn(-halfW, halfW),
+            (item.z + offset).coerceIn(-halfD, halfD),
+            item.rotation,
+        )
+        commit(setup.copy(placedItems = setup.placedItems + cloned))
+        _selectedId.value = cloned.id
+        toast("Duplicated ${cat.name}")
+    }
+
     fun deleteSelected() {
         val setup = current ?: return
         val id = _selectedId.value ?: return

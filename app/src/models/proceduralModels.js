@@ -86,6 +86,15 @@ export function create3DItemMesh(itemData, customFinish = null, deskHeight = 75)
     case 'coffeeMug':
       buildCoffeeMug(group, itemData);
       break;
+    case 'cableTrayMesh':
+      buildCableTrayMesh(group, itemData);
+      break;
+    case 'powerStripMagnetic':
+      buildPowerStrip(group, itemData);
+      break;
+    case 'cableSpineVertebrae':
+      buildCableSpine(group, itemData, deskHeight);
+      break;
     default:
       buildGenericBox(group, itemData);
       break;
@@ -679,4 +688,104 @@ function buildGenericBox(group, item) {
   const box = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), mat);
   box.position.y = h / 2;
   group.add(box);
+}
+
+function buildCableTrayMesh(group, item) {
+  const w = (item.dimensions.width || 60) * SCALE;
+  const d = (item.dimensions.depth || 16) * SCALE;
+  const h = (item.dimensions.height || 12) * SCALE;
+  const metalMat = new THREE.MeshStandardMaterial({
+    color: 0x334155,
+    roughness: 0.4,
+    metalness: 0.7,
+  });
+
+  // Tray bottom plate
+  const bottom = new THREE.Mesh(new THREE.BoxGeometry(w, 0.004, d), metalMat);
+  bottom.position.set(0, -h, 0);
+  group.add(bottom);
+
+  // Front and back perforated lips/walls
+  const wallFront = new THREE.Mesh(new THREE.BoxGeometry(w, h * 0.7, 0.003), metalMat);
+  wallFront.position.set(0, -h * 0.65, d / 2);
+  group.add(wallFront);
+
+  const wallBack = new THREE.Mesh(new THREE.BoxGeometry(w, h * 0.7, 0.003), metalMat);
+  wallBack.position.set(0, -h * 0.65, -d / 2);
+  group.add(wallBack);
+
+  // Mounting brackets attaching to desk underside
+  const bracketL = new THREE.Mesh(new THREE.BoxGeometry(0.015, h, 0.02), metalMat);
+  bracketL.position.set(-w * 0.42, -h / 2, 0);
+  group.add(bracketL);
+
+  const bracketR = new THREE.Mesh(new THREE.BoxGeometry(0.015, h, 0.02), metalMat);
+  bracketR.position.set(w * 0.42, -h / 2, 0);
+  group.add(bracketR);
+}
+
+function buildPowerStrip(group, item) {
+  const w = (item.dimensions.width || 32) * SCALE;
+  const d = (item.dimensions.depth || 8) * SCALE;
+  const h = (item.dimensions.height || 4) * SCALE;
+  const bodyMat = new THREE.MeshStandardMaterial({
+    color: 0x1e293b,
+    roughness: 0.35,
+    metalness: 0.2,
+  });
+  const outletMat = new THREE.MeshStandardMaterial({
+    color: 0x0f172a,
+    roughness: 0.6,
+  });
+  const ledMat = new THREE.MeshBasicMaterial({ color: 0x10b981 });
+
+  // Main housing
+  const body = new THREE.Mesh(new THREE.BoxGeometry(w, h, d), bodyMat);
+  body.position.set(0, -h / 2, 0);
+  group.add(body);
+
+  // Sockets
+  const numOutlets = 6;
+  const spacing = (w * 0.75) / (numOutlets - 1);
+  const startX = -w * 0.375;
+  for (let i = 0; i < numOutlets; i++) {
+    const socket = new THREE.Mesh(new THREE.BoxGeometry(0.022, 0.002, 0.025), outletMat);
+    socket.position.set(startX + i * spacing, -0.001, 0);
+    group.add(socket);
+  }
+
+  // Power LED
+  const led = new THREE.Mesh(new THREE.BoxGeometry(0.006, 0.002, 0.006), ledMat);
+  led.position.set(w * 0.44, 0.001, 0);
+  group.add(led);
+}
+
+function buildCableSpine(group, item, deskHeight = 74) {
+  const w = (item.dimensions.width || 8) * SCALE;
+  const d = (item.dimensions.depth || 8) * SCALE;
+  const spineHeight = (deskHeight - 4) * SCALE;
+  const spineMat = new THREE.MeshStandardMaterial({
+    color: 0x475569,
+    roughness: 0.5,
+    metalness: 0.3,
+  });
+  const baseMat = new THREE.MeshStandardMaterial({
+    color: 0x1e293b,
+    roughness: 0.3,
+    metalness: 0.8,
+  });
+
+  // Floor plate
+  const basePlate = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.08, 0.015, 16), baseMat);
+  basePlate.position.set(0, -spineHeight, 0);
+  group.add(basePlate);
+
+  // Spine vertebrae
+  const segments = 12;
+  const segHeight = spineHeight / segments;
+  for (let i = 0; i < segments; i++) {
+    const seg = new THREE.Mesh(new THREE.BoxGeometry(w, segHeight * 0.75, d), spineMat);
+    seg.position.set(0, -i * segHeight - segHeight / 2, 0);
+    group.add(seg);
+  }
 }

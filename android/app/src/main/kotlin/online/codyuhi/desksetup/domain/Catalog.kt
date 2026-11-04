@@ -21,6 +21,7 @@ enum class ModelType {
     DeskBaseSetter, MonitorUltrawide, MonitorDual27, MonitorVertical, MonitorSuperUltrawide,
     PcTowerRgb, MacStudio, LaptopOnStand, KeyboardMech, DeskPad, MouseErgo, SpeakersPair,
     HeadphonesStand, MonitorLightBar, ArchitectLamp, RgbLedStrip, PottedPlant, PegboardWall, CoffeeMug,
+    CableTrayMesh, PowerStripMagnetic, CableSpineVertebrae,
 }
 
 data class CatalogItem(
@@ -56,6 +57,7 @@ object Catalog {
         Category("audio", "Audio & Acoustics"),
         Category("lighting", "Lighting & RGB"),
         Category("decor", "Decor & Storage"),
+        Category("cable-management", "Cable Management"),
     )
 
     val finishes = linkedMapOf(
@@ -117,6 +119,13 @@ object Catalog {
             "Wall mounted board with wooden pegs, mini shelves & headphone hooks.", ModelType.PegboardWall),
         CatalogItem("decor-coffee-mug", "Ceramic Espresso Mug", "decor", 18, Dimensions(10.0, 10.0, 9.0),
             "Handcrafted matte ceramic coffee mug on a cork coaster.", ModelType.CoffeeMug),
+
+        CatalogItem("cable-tray-mesh", "Under-Desk Steel Mesh Cable Tray", "cable-management", 39, Dimensions(60.0, 16.0, 12.0),
+            "Ventilated steel mesh under-desk tray to house power bricks and route cables.", ModelType.CableTrayMesh),
+        CatalogItem("power-strip-magnetic", "Magnetic Smart Power Strip (8-Outlet)", "cable-management", 49, Dimensions(32.0, 8.0, 4.0),
+            "Heavy-duty surge protector with magnetic under-desk mounting brackets and USB-C PD.", ModelType.PowerStripMagnetic),
+        CatalogItem("cable-spine-vertebrae", "Articulated Wire Management Spine", "cable-management", 29, Dimensions(8.0, 8.0, 75.0),
+            "Flexible vertebrae cable spine guiding wires smoothly from desk to floor through sit-stand motion.", ModelType.CableSpineVertebrae),
     )
 
     private val byId = items.associateBy { it.id }

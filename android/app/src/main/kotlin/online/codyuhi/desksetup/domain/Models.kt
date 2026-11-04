@@ -151,6 +151,17 @@ object Models {
                         cyl(r * 0.88, r * 0.88, 0.005, Material(0xFF451A03, 0.1), v(0, h * 0.85, 0)),
                     )
                 }
+                ModelType.CableTrayMesh -> listOf(
+                    box(w, 0.005, d, Material(0xFF334155, 0.4, 0.7), v(0, -h, 0)),
+                    box(w, h * 0.7, 0.004, Material(0xFF334155, 0.4, 0.7), v(0, -h * 0.65, d / 2)),
+                    box(w, h * 0.7, 0.004, Material(0xFF334155, 0.4, 0.7), v(0, -h * 0.65, -d / 2)),
+                )
+                ModelType.PowerStripMagnetic -> listOf(
+                    box(w, h, d, Material(0xFF1E293B, 0.35, 0.2), v(0, -h / 2, 0)),
+                )
+                ModelType.CableSpineVertebrae -> listOf(
+                    cyl(w / 2, w / 2, h, Material(0xFF475569, 0.5, 0.3), v(0, -h / 2, 0)),
+                )
                 ModelType.DeskBaseSetter -> listOf(box(w, h, d, Material(0xFF64748B, 0.5), v(0, h / 2, 0)))
             },
         )
@@ -158,10 +169,11 @@ object Models {
 
     /**
      * Vertical lift applied when placing an item: the pegboard hangs on the wall in the web scene
-     * (y + 0.35 m, z fixed at -0.42 m), everything else sits on the desktop.
+     * (y + 0.35 m, z fixed at -0.42 m), cable management hangs under the desk, everything else sits on the desktop.
      */
     fun placement(item: CatalogItem, xCm: Double, zCm: Double, deskTopM: Double): Vec3 =
         if (item.model == ModelType.PegboardWall) Vec3(xCm * SCALE, deskTopM + 0.35, -0.42)
+        else if (item.category == "cable-management") Vec3(xCm * SCALE, deskTopM - 0.035, zCm * SCALE)
         else Vec3(xCm * SCALE, deskTopM, zCm * SCALE)
 
     /** Bounds of a model in its own space (approximating round shapes by their boxes). */

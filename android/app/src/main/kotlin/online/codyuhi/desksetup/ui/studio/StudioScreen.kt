@@ -171,6 +171,10 @@ fun StudioScreen(vm: StudioViewModel, dark: Boolean) {
             haptics.performHapticFeedback(HapticFeedbackType.SegmentTick)
             vm.rotateSelected45()
         },
+        duplicate = {
+            haptics.performHapticFeedback(HapticFeedbackType.Confirm)
+            vm.duplicateSelected()
+        },
         delete = {
             haptics.performHapticFeedback(HapticFeedbackType.Confirm)
             vm.deleteSelected()
@@ -357,6 +361,10 @@ private fun CanvasOverlays(vm: StudioViewModel, setup: DeskSetup, selectedId: St
                     CedarIconButton(Lucide.RotateCw, "Rotate 45°", {
                         haptics.performHapticFeedback(HapticFeedbackType.SegmentTick)
                         vm.rotateSelected45()
+                    }, outlined = false)
+                    CedarIconButton(Lucide.Copy, "Duplicate item", {
+                        haptics.performHapticFeedback(HapticFeedbackType.Confirm)
+                        vm.duplicateSelected()
                     }, outlined = false)
                     CedarIconButton(Lucide.Trash2, "Delete item", {
                         haptics.performHapticFeedback(HapticFeedbackType.Confirm)

@@ -11,6 +11,9 @@ class AppState {
     this.viewMode = '3d'; // '3d' | '2d'
     this.selectedItemId = null;
 
+    this.snapToGrid = false; // 5cm increments snap
+    this.showUnderDeskFrame = false; // standing desk frame clearance overlay
+
     this.placedItems = [];
 
     // History stack for Undo/Redo
@@ -147,6 +150,123 @@ class AppState {
       this.saveHistoryState();
       this.notify('updateRotation');
     }
+  }
+
+  setSnapToGrid(enabled) {
+    this.snapToGrid = !!enabled;
+    this.notify('snapToGrid');
+  }
+
+  toggleSnapToGrid() {
+    this.setSnapToGrid(!this.snapToGrid);
+    return this.snapToGrid;
+  }
+
+  setShowUnderDeskFrame(enabled) {
+    this.showUnderDeskFrame = !!enabled;
+    this.notify('underDeskFrame');
+  }
+
+  toggleUnderDeskFrame() {
+    this.setShowUnderDeskFrame(!this.showUnderDeskFrame);
+    return this.showUnderDeskFrame;
+  }
+
+  duplicateSelectedItem() {
+    if (!this.selectedItemId) return null;
+    const source = this.placedItems.find((i) => i.id === this.selectedItemId);
+    if (!source) return null;
+
+    const offset = 5;
+    const halfW = (this.deskWidth / 2) - 10;
+    const halfD = (this.deskDepth / 2) - 10;
+    const newX = Math.max(-halfW, Math.min(halfW, source.x + offset));
+    const newZ = Math.max(-halfD, Math.min(halfD, source.z + offset));
+
+    const newItem = {
+      id: 'item_' + Date.now() + '_' + Math.floor(Math.random() * 1000),
+      catalogId: source.catalogId,
+      x: newX,
+      z: newZ,
+      rotation: source.rotation || 0,
+    };
+    if (source.finish) newItem.finish = source.finish;
+
+    this.placedItems.push(newItem);
+    this.selectedItemId = newItem.id;
+    this.saveHistoryState();
+    this.notify('addItem');
+    return newItem;
+  }
+
+  checkClampCollision(item) {
+    if (!item) return null;
+    const cat = CATALOG_ITEMS.find((c) => c.id === item.catalogId);
+    if (!cat || (!cat.hasClamp && cat.category !== 'monitors' && cat.threeType !== 'architectLamp')) {
+      return null;
+    }
+
+    const depth = cat.dimensions?.depth || 20;
+    const rot = item.rotation || 0;
+    const clampX = item.x - Math.sin(rot) * (depth / 2);
+    const clampZ = item.z - Math.cos(rot) * (depth / 2);
+
+    const halfW = this.deskWidth / 2;
+    const halfD = this.deskDepth / 2;
+
+    if (Math.abs(clampX) > halfW || Math.abs(clampZ) > halfD) {
+      return {
+        collides: true,
+        reason: 'Clamp extends beyond desk surface edge',
+        clampX,
+        clampZ,
+      };
+    }
+
+    const legSpanX = this.deskWidth * 0.35;
+    if (Math.abs(clampX) <= legSpanX + 2 && Math.abs(clampZ) <= 5) {
+      return {
+        collides: true,
+        reason: 'Clamp collides with central standing frame crossbar beam',
+        clampX,
+        clampZ,
+      };
+    }
+
+    const bracketHalfDepth = this.deskDepth * 0.35;
+    if (
+      (Math.abs(clampX - legSpanX) <= 6 || Math.abs(clampX - (-legSpanX)) <= 6) &&
+      Math.abs(clampZ) <= bracketHalfDepth
+    ) {
+      return {
+        collides: true,
+        reason: 'Clamp collides with standing desk leg frame bracket',
+        clampX,
+        clampZ,
+      };
+    }
+
+    const distToRear = Math.abs(clampZ - (-halfD));
+    const distToFront = Math.abs(clampZ - halfD);
+    const distToLeft = Math.abs(clampX - (-halfW));
+    const distToRight = Math.abs(clampX - halfW);
+    const minDist = Math.min(distToRear, distToFront, distToLeft, distToRight);
+
+    if (minDist > 8) {
+      return {
+        collides: true,
+        reason: 'Clamp is too far from desk edge (>8cm) to mount',
+        clampX,
+        clampZ,
+      };
+    }
+
+    return {
+      collides: false,
+      reason: 'Clear mounting position',
+      clampX,
+      clampZ,
+    };
   }
 
   deleteSelectedItem() {

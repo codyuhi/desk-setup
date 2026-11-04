@@ -688,11 +688,29 @@
           "x": 1,
           "z": 2,
           "rotation": 0
+        },
+        {
+          "catalogId": "cable-tray-mesh",
+          "x": 1,
+          "z": 2,
+          "rotation": 0
+        },
+        {
+          "catalogId": "power-strip-magnetic",
+          "x": 1,
+          "z": 2,
+          "rotation": 0
+        },
+        {
+          "catalogId": "cable-spine-vertebrae",
+          "x": 1,
+          "z": 2,
+          "rotation": 0
         }
       ]
     },
     "budget": {
-      "totalPrice": 11279,
+      "totalPrice": 11396,
       "breakdown": [
         {
           "name": "Desk Frame & Surface (Alpine White - 137×73cm)",
@@ -769,6 +787,18 @@
         {
           "name": "Ceramic Espresso Mug",
           "price": 18
+        },
+        {
+          "name": "Under-Desk Steel Mesh Cable Tray",
+          "price": 39
+        },
+        {
+          "name": "Magnetic Smart Power Strip (8-Outlet)",
+          "price": 49
+        },
+        {
+          "name": "Articulated Wire Management Spine",
+          "price": 29
         }
       ]
     },

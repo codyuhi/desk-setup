@@ -55,6 +55,8 @@ export function exportJSONConfig() {
     version: '1.0',
     createdAt: new Date().toISOString(),
     deskHeight: state.deskHeight,
+    deskWidth: state.deskWidth,
+    deskDepth: state.deskDepth,
     deskFinish: state.deskFinish,
     placedItems: state.placedItems,
     budget: state.getCalculatedBudget(),
@@ -76,6 +78,8 @@ export function importJSONConfig(file) {
         const data = JSON.parse(e.target.result);
         if (data.placedItems && Array.isArray(data.placedItems)) {
           state.deskHeight = data.deskHeight || 74;
+          state.deskWidth = data.deskWidth || 160;
+          state.deskDepth = data.deskDepth || 80;
           state.deskFinish = data.deskFinish || 'walnut';
           state.placedItems = data.placedItems;
           state.selectedItemId = null;
