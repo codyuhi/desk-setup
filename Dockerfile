@@ -1,7 +1,7 @@
 # Root Dockerfile for Argo Workflows / Kaniko building from repo root context
 
 # Stage 1: Build stage
-FROM node:20-alpine AS builder
+FROM node:25-alpine AS builder
 
 WORKDIR /app
 
