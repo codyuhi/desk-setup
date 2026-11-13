@@ -18,7 +18,7 @@ COPY app/ .
 RUN npm run build
 
 # Stage 2: Production web server stage
-FROM nginxinc/nginx-unprivileged:1.30-alpine AS runner
+FROM nginxinc/nginx-unprivileged:1.31-alpine AS runner
 
 # Copy built static assets from builder stage into Nginx html directory
 COPY --from=builder /app/dist /usr/share/nginx/html
