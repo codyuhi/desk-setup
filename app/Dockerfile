@@ -1,7 +1,7 @@
 # Multi-stage Dockerfile for DESKForge Studio Web Application
 
 # Stage 1: Build stage
-FROM node:20-alpine AS builder
+FROM node:25-alpine AS builder
 
 WORKDIR /app
 
@@ -18,7 +18,7 @@ COPY . .
 RUN npm run build
 
 # Stage 2: Production web server stage
-FROM nginx:1.25-alpine AS runner
+FROM nginx:1.31-alpine AS runner
 
 # Copy built static assets from builder stage into Nginx html directory
 COPY --from=builder /app/dist /usr/share/nginx/html
