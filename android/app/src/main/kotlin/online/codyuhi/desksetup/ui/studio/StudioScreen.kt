@@ -74,9 +74,13 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.window.core.layout.WindowSizeClass
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import online.codyuhi.desksetup.data.ViewMode
 import online.codyuhi.desksetup.domain.BudgetCsv
 import online.codyuhi.desksetup.domain.CameraView
@@ -123,6 +127,7 @@ fun StudioScreen(vm: StudioViewModel, dark: Boolean) {
     val haptics = LocalHapticFeedback.current
     val measurer = rememberTextMeasurer()
     val colors = Cedar.colors
+    val scope = rememberCoroutineScope()
 
     var panel by rememberSaveable { mutableStateOf<Panel?>(null) }
     var inspectorTab by rememberSaveable { mutableStateOf(InspectorTab.Desk) }
@@ -193,8 +198,13 @@ fun StudioScreen(vm: StudioViewModel, dark: Boolean) {
             if (shot == null) {
                 toast = "Snapshot unavailable; try again."
             } else {
-                Exports.share(context, "desk-setup-${stamp()}.png", "image/png", Exports.png(Exports.withBadge(context, shot)), "Share snapshot")
-                haptics.performHapticFeedback(HapticFeedbackType.Confirm)
+                scope.launch {
+                    val bytes = withContext(Dispatchers.Default) {
+                        Exports.png(Exports.withBadge(context, shot))
+                    }
+                    Exports.share(context, "desk-setup-${stamp()}.png", "image/png", bytes, "Share snapshot")
+                    haptics.performHapticFeedback(HapticFeedbackType.Confirm)
+                }
             }
         },
         saveJson = { saveJson.launch("desk-config-${stamp()}.json") },
