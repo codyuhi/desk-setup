@@ -14,7 +14,7 @@ datastore = "1.3.0"
 splashscreen = "1.2.0"
 serialization = "1.12.0"
 coroutines = "1.11.0"
-sceneview = "4.67.0"
+sceneview = "4.69.5"
 junit = "4.13.2"
 turbine = "1.2.1"
 
